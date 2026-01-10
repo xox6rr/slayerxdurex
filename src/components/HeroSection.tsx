@@ -312,26 +312,6 @@ const HeroSection = () => {
               </Button>
             </motion.div>
 
-            {/* Current Theme Badge */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 1 }}
-              className="mt-8 flex items-center gap-3 justify-center lg:justify-start"
-            >
-              <div 
-                className="w-10 h-10 rounded-full flex items-center justify-center border-2"
-                style={{ 
-                  background: themeInfo.colors.gradient,
-                  borderColor: `hsl(${themeInfo.colors.accent})`
-                }}
-              >
-                <span className="font-japanese text-xs text-white">滅</span>
-              </div>
-              <span className="text-muted-foreground text-sm">
-                {themeInfo.name} Theme Active
-              </span>
-            </motion.div>
           </motion.div>
         </div>
       </div>
