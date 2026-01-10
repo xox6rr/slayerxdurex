@@ -2,8 +2,11 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Flame, Shield } from "lucide-react";
 import NichirinBlade from "./NichirinBlade";
+import { useHashiraTheme } from "@/contexts/HashiraThemeContext";
 
 const HeroSection = () => {
+  const { themeInfo } = useHashiraTheme();
+
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background layers */}
@@ -30,8 +33,11 @@ const HeroSection = () => {
         </svg>
       </div>
 
-      {/* Radial glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full bg-[hsl(0,85%,45%)] opacity-5 blur-[150px]" />
+      {/* Dynamic theme glow */}
+      <div 
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full opacity-10 blur-[150px]"
+        style={{ background: `hsl(${themeInfo.colors.primary})` }}
+      />
 
       {/* Side kanji decorations */}
       <div className="absolute left-4 top-1/2 -translate-y-1/2 hidden lg:block">
@@ -74,11 +80,17 @@ const HeroSection = () => {
               transition={{ delay: 0.2 }}
               className="mb-6"
             >
-              <span className="font-japanese text-2xl md:text-3xl text-[hsl(270,60%,70%)] tracking-wider">
-                鬼滅の刃
+              <span 
+                className="font-japanese text-2xl md:text-3xl tracking-wider"
+                style={{ color: `hsl(${themeInfo.colors.accent})` }}
+              >
+                {themeInfo.japaneseName}
               </span>
               <span className="mx-4 text-muted-foreground">×</span>
-              <span className="font-display text-2xl md:text-3xl text-primary tracking-wider">
+              <span 
+                className="font-display text-2xl md:text-3xl tracking-wider"
+                style={{ color: `hsl(${themeInfo.colors.primary})` }}
+              >
                 DUREX
               </span>
             </motion.div>
@@ -91,7 +103,12 @@ const HeroSection = () => {
               className="font-brush text-5xl md:text-6xl lg:text-7xl leading-tight mb-6"
             >
               <span className="text-foreground block">TOTAL</span>
-              <span className="text-gradient-nichirin block">CONCENTRATION</span>
+              <span 
+                className="block bg-clip-text text-transparent"
+                style={{ backgroundImage: themeInfo.colors.gradient }}
+              >
+                CONCENTRATION
+              </span>
               <span className="text-foreground block">PROTECTION</span>
             </motion.h1>
 
@@ -102,7 +119,7 @@ const HeroSection = () => {
               transition={{ delay: 0.5 }}
               className="text-muted-foreground text-lg md:text-xl max-w-md mx-auto lg:mx-0 mb-8 font-japanese"
             >
-              水の呼吸、壱ノ型 — Embrace the breathing techniques of the Demon Slayer Corps with protection forged like a Nichirin blade.
+              {themeInfo.title} — {themeInfo.description}. Embrace the breathing techniques of the Demon Slayer Corps.
             </motion.p>
 
             {/* CTA Buttons */}
@@ -112,31 +129,50 @@ const HeroSection = () => {
               transition={{ delay: 0.7 }}
               className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
             >
-              <Button size="lg" className="glow-crimson text-lg px-8 py-6 font-display tracking-wider breathing-pulse">
+              <Button 
+                size="lg" 
+                className="text-lg px-8 py-6 font-display tracking-wider breathing-pulse text-white border-0"
+                style={{ 
+                  background: themeInfo.colors.gradient,
+                  boxShadow: `0 0 40px hsl(${themeInfo.colors.glow} / 0.5)`
+                }}
+              >
                 <Flame className="w-5 h-5 mr-2" />
                 全集中 • SHOP NOW
               </Button>
               <Button
                 size="lg"
                 variant="outline"
-                className="text-lg px-8 py-6 font-display tracking-wider border-[hsl(270,60%,50%)] hover:bg-[hsl(270,60%,50%,0.1)] text-[hsl(270,60%,70%)]"
+                className="text-lg px-8 py-6 font-display tracking-wider"
+                style={{ 
+                  borderColor: `hsl(${themeInfo.colors.primary})`,
+                  color: `hsl(${themeInfo.colors.accent})`
+                }}
               >
                 <Shield className="w-5 h-5 mr-2" />
                 BREATHING STYLES
               </Button>
             </motion.div>
 
-            {/* Demon Slayer Corps Badge */}
+            {/* Current Theme Badge */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 1 }}
               className="mt-8 flex items-center gap-3 justify-center lg:justify-start"
             >
-              <div className="w-10 h-10 rounded-full bg-[hsl(160,70%,25%)] flex items-center justify-center border-2 border-[hsl(160,60%,35%)]">
-                <span className="font-japanese text-xs text-foreground">滅</span>
+              <div 
+                className="w-10 h-10 rounded-full flex items-center justify-center border-2"
+                style={{ 
+                  background: themeInfo.colors.gradient,
+                  borderColor: `hsl(${themeInfo.colors.accent})`
+                }}
+              >
+                <span className="font-japanese text-xs text-white">滅</span>
               </div>
-              <span className="text-muted-foreground text-sm">Approved by the Demon Slayer Corps</span>
+              <span className="text-muted-foreground text-sm">
+                {themeInfo.name} Theme Active
+              </span>
             </motion.div>
           </motion.div>
 
@@ -165,7 +201,10 @@ const HeroSection = () => {
           className="flex flex-col items-center gap-2"
         >
           <span className="text-muted-foreground text-sm font-japanese tracking-widest">下へ</span>
-          <div className="w-px h-12 bg-gradient-to-b from-[hsl(270,60%,50%)] to-transparent" />
+          <div 
+            className="w-px h-12"
+            style={{ background: `linear-gradient(to bottom, hsl(${themeInfo.colors.primary}), transparent)` }}
+          />
         </motion.div>
       </motion.div>
     </section>
