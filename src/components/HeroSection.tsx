@@ -73,39 +73,52 @@ const HeroSection = () => {
         </svg>
       </div>
 
-      {/* Dynamic Character Background with Parallax */}
+      {/* Dynamic Character Background with Parallax - CENTERED */}
       <AnimatePresence mode="wait">
         <motion.div
           key={theme}
-          initial={{ opacity: 0, scale: 1.15, x: 50 }}
-          animate={{ opacity: 1, scale: 1, x: 0 }}
-          exit={{ opacity: 0, scale: 0.95, x: -50 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          className="absolute right-0 bottom-0 w-[55%] h-[110%] pointer-events-none hidden lg:block"
+          initial={{ opacity: 0, scale: 1.2, y: 50 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          exit={{ opacity: 0, scale: 0.9, y: -30 }}
+          transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
+          className="absolute inset-0 flex items-end justify-center pointer-events-none"
           style={{ 
             y: characterY,
-            scale: characterScale,
-            opacity: characterOpacity
           }}
         >
-          <motion.img 
-            src={currentCharacterImg} 
-            alt={themeInfo.name}
-            className="w-full h-full object-contain object-bottom"
-            style={{
-              maskImage: 'linear-gradient(to top, rgba(0,0,0,0.9), rgba(0,0,0,0.4) 50%, transparent 85%), linear-gradient(to left, rgba(0,0,0,0.9), rgba(0,0,0,0.3) 70%, transparent)',
-              WebkitMaskImage: 'linear-gradient(to top, rgba(0,0,0,0.9), rgba(0,0,0,0.4) 50%, transparent 85%), linear-gradient(to left, rgba(0,0,0,0.9), rgba(0,0,0,0.3) 70%, transparent)',
-              filter: `drop-shadow(0 0 60px hsl(${themeInfo.colors.glow} / 0.3))`,
-            }}
-          />
-          
-          {/* Character glow effect */}
-          <div 
-            className="absolute inset-0 opacity-20 blur-3xl"
-            style={{ 
-              background: `radial-gradient(ellipse at center bottom, hsl(${themeInfo.colors.primary} / 0.4), transparent 60%)` 
-            }}
-          />
+          {/* Character container */}
+          <motion.div 
+            className="relative w-full h-full max-w-3xl"
+            style={{ scale: characterScale }}
+          >
+            <motion.img 
+              src={currentCharacterImg} 
+              alt={themeInfo.name}
+              className="absolute bottom-0 left-1/2 -translate-x-1/2 w-auto h-[95%] max-h-[900px] object-contain"
+              style={{
+                opacity: 0.35,
+                maskImage: 'radial-gradient(ellipse 80% 90% at 50% 80%, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.5) 50%, transparent 80%)',
+                WebkitMaskImage: 'radial-gradient(ellipse 80% 90% at 50% 80%, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.5) 50%, transparent 80%)',
+                filter: `drop-shadow(0 0 100px hsl(${themeInfo.colors.glow} / 0.4)) drop-shadow(0 0 200px hsl(${themeInfo.colors.primary} / 0.2))`,
+              }}
+            />
+            
+            {/* Character aura glow */}
+            <div 
+              className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[120%] h-[80%] opacity-30 blur-[100px]"
+              style={{ 
+                background: `radial-gradient(ellipse at 50% 100%, hsl(${themeInfo.colors.primary} / 0.6), hsl(${themeInfo.colors.glow} / 0.3) 40%, transparent 70%)` 
+              }}
+            />
+            
+            {/* Bottom gradient fade */}
+            <div 
+              className="absolute bottom-0 left-0 right-0 h-40 pointer-events-none"
+              style={{
+                background: 'linear-gradient(to top, hsl(var(--background)), transparent)'
+              }}
+            />
+          </motion.div>
         </motion.div>
       </AnimatePresence>
 
