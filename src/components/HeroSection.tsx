@@ -88,7 +88,7 @@ const HeroSection = () => {
           {/* Breathing animation wrapper */}
           <motion.div
             animate={{ 
-              scale: [1, 1.015, 1],
+              scale: [1, 1.02, 1],
             }}
             transition={{ 
               duration: 4, 
@@ -102,52 +102,77 @@ const HeroSection = () => {
               alt={themeInfo.name}
               className="w-auto h-full min-h-screen object-cover object-top"
               style={{
-                opacity: 0.55,
+                opacity: 0.7,
                 minWidth: '100%',
-                maskImage: 'radial-gradient(ellipse 100% 100% at 50% 50%, rgba(0,0,0,1) 0%, rgba(0,0,0,0.7) 50%, rgba(0,0,0,0.3) 75%, transparent 95%)',
-                WebkitMaskImage: 'radial-gradient(ellipse 100% 100% at 50% 50%, rgba(0,0,0,1) 0%, rgba(0,0,0,0.7) 50%, rgba(0,0,0,0.3) 75%, transparent 95%)',
-                filter: `drop-shadow(0 0 150px hsl(${themeInfo.colors.glow} / 0.6))`,
+                maskImage: 'radial-gradient(ellipse 90% 90% at 50% 45%, rgba(0,0,0,1) 0%, rgba(0,0,0,0.8) 40%, rgba(0,0,0,0.4) 65%, transparent 85%)',
+                WebkitMaskImage: 'radial-gradient(ellipse 90% 90% at 50% 45%, rgba(0,0,0,1) 0%, rgba(0,0,0,0.8) 40%, rgba(0,0,0,0.4) 65%, transparent 85%)',
+                filter: `drop-shadow(0 0 80px hsl(${themeInfo.colors.glow})) drop-shadow(0 0 200px hsl(${themeInfo.colors.primary} / 0.8))`,
               }}
             />
           </motion.div>
           
-          {/* Pulsing aura effect */}
+          {/* Intense pulsing aura effect */}
           <motion.div 
-            className="absolute inset-0 opacity-30"
+            className="absolute inset-0"
             animate={{
-              opacity: [0.2, 0.35, 0.2],
+              opacity: [0.3, 0.5, 0.3],
             }}
             transition={{
-              duration: 3,
+              duration: 2.5,
               repeat: Infinity,
               ease: "easeInOut",
             }}
             style={{ 
-              background: `radial-gradient(ellipse at 50% 50%, hsl(${themeInfo.colors.primary} / 0.5), hsl(${themeInfo.colors.glow} / 0.3) 40%, transparent 70%)` 
+              background: `radial-gradient(ellipse at 50% 40%, hsl(${themeInfo.colors.primary} / 0.4), hsl(${themeInfo.colors.glow} / 0.2) 35%, transparent 60%)` 
             }}
           />
           
           {/* Bottom gradient fade */}
           <div 
-            className="absolute bottom-0 left-0 right-0 h-64 pointer-events-none"
+            className="absolute bottom-0 left-0 right-0 h-72 pointer-events-none"
             style={{
-              background: 'linear-gradient(to top, hsl(var(--background)), hsl(var(--background) / 0.7), transparent)'
+              background: 'linear-gradient(to top, hsl(var(--background)), hsl(var(--background) / 0.8) 30%, transparent)'
             }}
           />
           
           {/* Top gradient fade for navbar */}
           <div 
-            className="absolute top-0 left-0 right-0 h-32 pointer-events-none"
+            className="absolute top-0 left-0 right-0 h-40 pointer-events-none"
             style={{
-              background: 'linear-gradient(to bottom, hsl(var(--background) / 0.5), transparent)'
+              background: 'linear-gradient(to bottom, hsl(var(--background) / 0.6), transparent)'
             }}
           />
         </motion.div>
       </AnimatePresence>
 
-      {/* Dynamic theme glow */}
+      {/* Cinematic Vignette Effect */}
       <div 
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full opacity-10 blur-[150px]"
+        className="absolute inset-0 pointer-events-none z-10"
+        style={{
+          background: 'radial-gradient(ellipse 70% 60% at 50% 50%, transparent 0%, transparent 50%, hsl(var(--background) / 0.4) 75%, hsl(var(--background) / 0.8) 90%, hsl(var(--background)) 100%)',
+        }}
+      />
+      
+      {/* Corner vignettes for extra drama */}
+      <div 
+        className="absolute inset-0 pointer-events-none z-10"
+        style={{
+          boxShadow: 'inset 0 0 200px 60px hsl(var(--background) / 0.6)',
+        }}
+      />
+
+      {/* Dynamic theme glow - Enhanced */}
+      <motion.div 
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[1000px] rounded-full blur-[180px]"
+        animate={{
+          opacity: [0.15, 0.25, 0.15],
+          scale: [1, 1.1, 1],
+        }}
+        transition={{
+          duration: 4,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
         style={{ background: `hsl(${themeInfo.colors.primary})` }}
       />
 
