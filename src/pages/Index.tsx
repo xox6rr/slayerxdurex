@@ -10,7 +10,9 @@ import Footer from "@/components/Footer";
 import AtmosphericParticles from "@/components/AtmosphericParticles";
 import WisteriaDecoration from "@/components/WisteriaDecoration";
 import ThemeTransitionOverlay from "@/components/ThemeTransitionOverlay";
+import CartDrawer from "@/components/CartDrawer";
 import { HashiraThemeProvider, useHashiraTheme } from "@/contexts/HashiraThemeContext";
+import { CartProvider } from "@/contexts/CartContext";
 import { motion } from "framer-motion";
 
 const IndexContent = () => {
@@ -24,6 +26,7 @@ const IndexContent = () => {
       className="min-h-screen bg-background overflow-x-hidden"
     >
       <ThemeTransitionOverlay isTransitioning={isTransitioning} targetTheme={targetTheme} />
+      <CartDrawer />
       <AtmosphericParticles />
       <WisteriaDecoration />
       <Navbar />
@@ -46,7 +49,9 @@ const IndexContent = () => {
 const Index = () => {
   return (
     <HashiraThemeProvider>
-      <IndexContent />
+      <CartProvider>
+        <IndexContent />
+      </CartProvider>
     </HashiraThemeProvider>
   );
 };
