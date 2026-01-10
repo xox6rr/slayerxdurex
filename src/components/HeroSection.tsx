@@ -109,6 +109,85 @@ const HeroSection = () => {
         </motion.div>
       </AnimatePresence>
 
+      {/* Floating Character Name Badge */}
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={`badge-${theme}`}
+          initial={{ opacity: 0, x: 100, rotateY: -30 }}
+          animate={{ opacity: 1, x: 0, rotateY: 0 }}
+          exit={{ opacity: 0, x: -50, rotateY: 30 }}
+          transition={{ 
+            duration: 0.6, 
+            ease: [0.22, 1, 0.36, 1],
+            delay: 0.2 
+          }}
+          className="absolute right-8 top-1/3 hidden lg:flex flex-col items-end gap-2 z-30"
+        >
+          {/* Japanese Name - Large vertical text */}
+          <motion.div
+            className="relative"
+            animate={{ y: [0, -5, 0] }}
+            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+          >
+            <div 
+              className="font-japanese text-5xl xl:text-6xl tracking-[0.3em] writing-vertical opacity-90"
+              style={{ 
+                writingMode: 'vertical-rl',
+                color: `hsl(${themeInfo.colors.accent})`,
+                textShadow: `0 0 30px hsl(${themeInfo.colors.glow} / 0.5), 0 0 60px hsl(${themeInfo.colors.primary} / 0.3)`,
+              }}
+            >
+              {themeInfo.japaneseName}
+            </div>
+            
+            {/* Glow line accent */}
+            <motion.div
+              initial={{ scaleY: 0 }}
+              animate={{ scaleY: 1 }}
+              transition={{ delay: 0.5, duration: 0.8, ease: "easeOut" }}
+              className="absolute -left-4 top-0 h-full w-px origin-top"
+              style={{ 
+                background: `linear-gradient(to bottom, transparent, hsl(${themeInfo.colors.primary}), transparent)` 
+              }}
+            />
+          </motion.div>
+
+          {/* English Name Badge */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.4, duration: 0.5 }}
+            className="relative mt-4"
+          >
+            <div 
+              className="px-4 py-2 rounded-lg backdrop-blur-md border"
+              style={{ 
+                background: `linear-gradient(135deg, hsl(${themeInfo.colors.primary} / 0.2), hsl(${themeInfo.colors.secondary} / 0.1))`,
+                borderColor: `hsl(${themeInfo.colors.accent} / 0.3)`,
+                boxShadow: `0 0 20px hsl(${themeInfo.colors.glow} / 0.2), inset 0 0 20px hsl(${themeInfo.colors.primary} / 0.1)`
+              }}
+            >
+              <span 
+                className="font-display text-sm tracking-widest uppercase"
+                style={{ color: `hsl(${themeInfo.colors.accent})` }}
+              >
+                {themeInfo.name}
+              </span>
+            </div>
+            
+            {/* Breathing style indicator */}
+            <motion.div
+              animate={{ opacity: [0.5, 1, 0.5] }}
+              transition={{ duration: 2, repeat: Infinity }}
+              className="absolute -bottom-6 right-0 text-xs font-japanese tracking-wider opacity-70"
+              style={{ color: `hsl(${themeInfo.colors.primary})` }}
+            >
+              {themeInfo.title}
+            </motion.div>
+          </motion.div>
+        </motion.div>
+      </AnimatePresence>
+
       {/* Dynamic theme glow */}
       <div 
         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full opacity-10 blur-[150px]"
