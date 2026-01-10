@@ -97,10 +97,44 @@ const HeroSection = () => {
             }}
             className="absolute inset-0 flex items-center justify-center"
           >
+            {/* Chromatic Aberration - Red/Cyan offset layers */}
+            {/* Red channel - offset left */}
+            <img 
+              src={currentCharacterImg} 
+              alt=""
+              aria-hidden="true"
+              className="absolute w-auto h-full min-h-screen object-cover object-top mix-blend-lighten"
+              style={{
+                opacity: 0.15,
+                minWidth: '100%',
+                transform: 'translateX(-3px)',
+                filter: 'url(#redChannel)',
+                maskImage: 'radial-gradient(ellipse 90% 90% at 50% 45%, rgba(0,0,0,1) 0%, rgba(0,0,0,0.8) 40%, rgba(0,0,0,0.4) 65%, transparent 85%)',
+                WebkitMaskImage: 'radial-gradient(ellipse 90% 90% at 50% 45%, rgba(0,0,0,1) 0%, rgba(0,0,0,0.8) 40%, rgba(0,0,0,0.4) 65%, transparent 85%)',
+              }}
+            />
+            
+            {/* Cyan channel - offset right */}
+            <img 
+              src={currentCharacterImg} 
+              alt=""
+              aria-hidden="true"
+              className="absolute w-auto h-full min-h-screen object-cover object-top mix-blend-lighten"
+              style={{
+                opacity: 0.15,
+                minWidth: '100%',
+                transform: 'translateX(3px)',
+                filter: 'url(#cyanChannel)',
+                maskImage: 'radial-gradient(ellipse 90% 90% at 50% 45%, rgba(0,0,0,1) 0%, rgba(0,0,0,0.8) 40%, rgba(0,0,0,0.4) 65%, transparent 85%)',
+                WebkitMaskImage: 'radial-gradient(ellipse 90% 90% at 50% 45%, rgba(0,0,0,1) 0%, rgba(0,0,0,0.8) 40%, rgba(0,0,0,0.4) 65%, transparent 85%)',
+              }}
+            />
+            
+            {/* Main character image */}
             <motion.img 
               src={currentCharacterImg} 
               alt={themeInfo.name}
-              className="w-auto h-full min-h-screen object-cover object-top"
+              className="absolute w-auto h-full min-h-screen object-cover object-top"
               style={{
                 opacity: 0.7,
                 minWidth: '100%',
@@ -110,6 +144,18 @@ const HeroSection = () => {
               }}
             />
           </motion.div>
+          
+          {/* SVG Filters for chromatic aberration */}
+          <svg className="absolute w-0 h-0" aria-hidden="true">
+            <defs>
+              <filter id="redChannel">
+                <feColorMatrix type="matrix" values="1 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0"/>
+              </filter>
+              <filter id="cyanChannel">
+                <feColorMatrix type="matrix" values="0 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 1 0"/>
+              </filter>
+            </defs>
+          </svg>
           
           {/* Intense pulsing aura effect */}
           <motion.div 
