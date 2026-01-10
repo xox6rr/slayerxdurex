@@ -87,6 +87,12 @@
     --sidebar-accent-foreground: 0 0% 100%;
     --sidebar-border: 240 15% 15%;
     --sidebar-ring: 180 70% 50%;
+
+    /* Dynamic Hashira Theme Variables */
+    --hashira-primary: 180 80% 45%;
+    --hashira-secondary: 160 50% 30%;
+    --hashira-accent: 200 90% 55%;
+    --hashira-glow: 180 80% 50%;
   }
 }
 
