@@ -1,12 +1,18 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Plus, Minus, ShoppingBag, Trash2 } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import { useCart } from "@/contexts/CartContext";
 import { useHashiraTheme } from "@/contexts/HashiraThemeContext";
 import { Button } from "@/components/ui/button";
-
 const CartDrawer = () => {
+  const navigate = useNavigate();
   const { items, isOpen, closeCart, removeItem, updateQuantity, totalItems, totalPrice, clearCart } = useCart();
   const { themeInfo } = useHashiraTheme();
+
+  const handleCheckout = () => {
+    closeCart();
+    navigate("/checkout");
+  };
 
   const formatPrice = (price: number) => `¥${price.toLocaleString()}`;
 
@@ -156,6 +162,7 @@ const CartDrawer = () => {
                 {/* Actions */}
                 <div className="space-y-2">
                   <Button
+                    onClick={handleCheckout}
                     className="w-full py-6 font-display tracking-wider text-white"
                     style={{ 
                       background: themeInfo.colors.gradient,
