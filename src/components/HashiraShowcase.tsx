@@ -2,6 +2,12 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import { cn } from "@/lib/utils";
 
+// Import character images
+import rengokuImg from "@/assets/characters/rengoku.png";
+import giyuImg from "@/assets/characters/giyu.png";
+import shinobuImg from "@/assets/characters/shinobu.png";
+import muichiroImg from "@/assets/characters/muichiro.png";
+
 const hashiras = [
   {
     name: "KYOJURO RENGOKU",
@@ -12,6 +18,7 @@ const hashiras = [
     color: "from-orange-500 via-red-500 to-yellow-500",
     glowColor: "shadow-[0_0_60px_hsl(25_100%_50%/0.5)]",
     silhouetteGradient: "from-orange-600 to-red-700",
+    image: rengokuImg,
   },
   {
     name: "GIYU TOMIOKA",
@@ -22,6 +29,7 @@ const hashiras = [
     color: "from-blue-400 via-cyan-500 to-blue-600",
     glowColor: "shadow-[0_0_60px_hsl(200_100%_50%/0.5)]",
     silhouetteGradient: "from-blue-500 to-cyan-600",
+    image: giyuImg,
   },
   {
     name: "SHINOBU KOCHO",
@@ -32,6 +40,7 @@ const hashiras = [
     color: "from-purple-400 via-pink-400 to-fuchsia-500",
     glowColor: "shadow-[0_0_60px_hsl(300_100%_60%/0.5)]",
     silhouetteGradient: "from-purple-500 to-fuchsia-600",
+    image: shinobuImg,
   },
   {
     name: "MUICHIRO TOKITO",
@@ -42,6 +51,7 @@ const hashiras = [
     color: "from-slate-300 via-teal-300 to-cyan-400",
     glowColor: "shadow-[0_0_60px_hsl(180_50%_70%/0.5)]",
     silhouetteGradient: "from-slate-400 to-teal-500",
+    image: muichiroImg,
   },
 ];
 
@@ -57,9 +67,9 @@ const HashiraCard = ({ hashira, index }: HashiraCardProps) => {
     offset: ["start end", "end start"],
   });
 
-  const y = useTransform(scrollYProgress, [0, 1], [100, -100]);
-  const opacity = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0, 1, 1, 0]);
-  const scale = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0.8, 1, 1, 0.8]);
+  const y = useTransform(scrollYProgress, [0, 1], [50, -50]);
+  const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0]);
+  const scale = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0.9, 1, 1, 0.9]);
 
   return (
     <motion.div
@@ -79,77 +89,90 @@ const HashiraCard = ({ hashira, index }: HashiraCardProps) => {
           )}
         />
 
-        <div className="relative p-8 lg:p-12 flex flex-col lg:flex-row items-center gap-8">
-          {/* Silhouette */}
+        <div className={cn(
+          "relative p-8 lg:p-12 flex flex-col lg:flex-row items-center gap-8",
+          index % 2 === 1 ? "lg:flex-row-reverse" : ""
+        )}>
+          {/* Character Image */}
           <motion.div
             style={{ y }}
             className="relative flex-shrink-0"
           >
             <div
               className={cn(
-                "w-48 h-64 lg:w-56 lg:h-72 rounded-2xl bg-gradient-to-b flex items-end justify-center overflow-hidden",
-                hashira.silhouetteGradient,
+                "relative w-48 h-64 lg:w-64 lg:h-80 rounded-2xl overflow-hidden",
                 hashira.glowColor
               )}
             >
-              {/* Silhouette SVG */}
-              <svg
-                viewBox="0 0 100 150"
-                className="w-full h-full opacity-90"
-                fill="currentColor"
-              >
-                <defs>
-                  <linearGradient id={`grad-${index}`} x1="0%" y1="0%" x2="0%" y2="100%">
-                    <stop offset="0%" stopColor="rgba(0,0,0,0.9)" />
-                    <stop offset="100%" stopColor="rgba(0,0,0,0.6)" />
-                  </linearGradient>
-                </defs>
-                <ellipse cx="50" cy="30" rx="15" ry="18" fill={`url(#grad-${index})`} />
-                <path
-                  d="M35 45 Q30 60 28 80 L25 150 L40 150 L42 90 L50 95 L58 90 L60 150 L75 150 L72 80 Q70 60 65 45 Z"
-                  fill={`url(#grad-${index})`}
-                />
-                <path
-                  d="M28 55 Q15 70 10 95 L20 100 Q28 75 35 60 Z"
-                  fill={`url(#grad-${index})`}
-                />
-                <path
-                  d="M72 55 Q85 70 90 95 L80 100 Q72 75 65 60 Z"
-                  fill={`url(#grad-${index})`}
-                />
-              </svg>
+              {/* Gradient background behind image */}
+              <div className={cn(
+                "absolute inset-0 bg-gradient-to-b",
+                hashira.silhouetteGradient
+              )} />
+              
+              {/* Character image */}
+              <motion.img
+                src={hashira.image}
+                alt={hashira.name}
+                className="relative z-10 w-full h-full object-cover"
+                whileHover={{ scale: 1.05 }}
+                transition={{ duration: 0.4 }}
+              />
 
-              {/* Sword accent */}
-              <div className="absolute bottom-4 right-4 w-1 h-32 bg-gradient-to-t from-transparent to-white/50 rotate-45 rounded-full" />
+              {/* Gradient overlay for depth */}
+              <div className="absolute inset-0 z-20 bg-gradient-to-t from-background/60 via-transparent to-transparent" />
+              
+              {/* Side gradient overlay */}
+              <div className={cn(
+                "absolute inset-0 z-20 opacity-30",
+                index % 2 === 0 
+                  ? "bg-gradient-to-r from-transparent to-background/50" 
+                  : "bg-gradient-to-l from-transparent to-background/50"
+              )} />
+
+              {/* Breathing style kanji overlay */}
+              <motion.div 
+                className="absolute top-3 right-3 z-30 font-japanese text-3xl text-white/80 drop-shadow-lg"
+                animate={{ 
+                  opacity: [0.6, 1, 0.6],
+                  scale: [1, 1.05, 1]
+                }}
+                transition={{ duration: 3, repeat: Infinity }}
+              >
+                {hashira.breathingStyle.charAt(0)}
+              </motion.div>
             </div>
 
             {/* Floating particles */}
-            {[...Array(5)].map((_, i) => (
+            {[...Array(6)].map((_, i) => (
               <motion.div
                 key={i}
                 className={cn("absolute w-2 h-2 rounded-full bg-gradient-to-br", hashira.color)}
                 style={{
-                  left: `${20 + Math.random() * 60}%`,
+                  left: `${10 + Math.random() * 80}%`,
                   top: `${10 + Math.random() * 80}%`,
                 }}
                 animate={{
-                  y: [0, -20, 0],
-                  opacity: [0.3, 0.8, 0.3],
-                  scale: [1, 1.2, 1],
+                  y: [0, -25, 0],
+                  opacity: [0.3, 0.9, 0.3],
+                  scale: [1, 1.3, 1],
                 }}
                 transition={{
-                  duration: 3 + Math.random() * 2,
+                  duration: 2.5 + Math.random() * 2,
                   repeat: Infinity,
-                  delay: i * 0.5,
+                  delay: i * 0.4,
                 }}
               />
             ))}
           </motion.div>
 
           {/* Content */}
-          <div className="flex-1 text-center lg:text-left">
+          <div className={cn(
+            "flex-1 text-center",
+            index % 2 === 0 ? "lg:text-left" : "lg:text-right"
+          )}>
             <motion.p
-              className="font-japanese text-2xl mb-2 bg-gradient-to-r bg-clip-text text-transparent opacity-80"
+              className="font-japanese text-2xl lg:text-3xl mb-2 bg-gradient-to-r bg-clip-text text-transparent"
               style={{
                 backgroundImage: `linear-gradient(to right, ${hashira.color.includes('orange') ? 'rgb(249, 115, 22), rgb(239, 68, 68)' : hashira.color.includes('blue') ? 'rgb(96, 165, 250), rgb(34, 211, 238)' : hashira.color.includes('purple') ? 'rgb(192, 132, 252), rgb(232, 121, 249)' : 'rgb(148, 163, 184), rgb(45, 212, 191)'})`
               }}
@@ -157,21 +180,27 @@ const HashiraCard = ({ hashira, index }: HashiraCardProps) => {
               {hashira.japanese}
             </motion.p>
 
-            <h3 className="font-display text-4xl lg:text-5xl text-foreground mb-2">
+            <h3 className="font-display text-4xl lg:text-5xl xl:text-6xl text-foreground mb-3">
               {hashira.name}
             </h3>
 
-            <p className={cn("font-display text-lg tracking-wider mb-4 bg-gradient-to-r bg-clip-text text-transparent", hashira.color)}>
+            <p className={cn("font-display text-lg lg:text-xl tracking-wider mb-4 bg-gradient-to-r bg-clip-text text-transparent", hashira.color)}>
               {hashira.title}
             </p>
 
-            <div className="inline-block px-4 py-2 rounded-full glass-dark mb-4">
+            <div className={cn(
+              "inline-block px-4 py-2 rounded-full glass-dark mb-5 border border-border/30",
+              index % 2 === 0 ? "lg:ml-0" : "lg:mr-0"
+            )}>
               <span className="font-japanese text-sm text-muted-foreground">
                 {hashira.breathingStyle}
               </span>
             </div>
 
-            <p className="text-muted-foreground leading-relaxed max-w-md mx-auto lg:mx-0">
+            <p className={cn(
+              "text-muted-foreground text-lg leading-relaxed max-w-lg",
+              index % 2 === 0 ? "mx-auto lg:mx-0" : "mx-auto lg:ml-auto lg:mr-0"
+            )}>
               {hashira.description}
             </p>
           </div>
@@ -199,6 +228,7 @@ const HashiraShowcase = () => {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
           className="text-center mb-20"
         >
           <p className="font-japanese text-sakura text-xl mb-4">柱</p>
