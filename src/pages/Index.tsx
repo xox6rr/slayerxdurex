@@ -9,34 +9,44 @@ import CTASection from "@/components/CTASection";
 import Footer from "@/components/Footer";
 import AtmosphericParticles from "@/components/AtmosphericParticles";
 import WisteriaDecoration from "@/components/WisteriaDecoration";
-import { HashiraThemeProvider } from "@/contexts/HashiraThemeContext";
+import ThemeTransitionOverlay from "@/components/ThemeTransitionOverlay";
+import { HashiraThemeProvider, useHashiraTheme } from "@/contexts/HashiraThemeContext";
 import { motion } from "framer-motion";
+
+const IndexContent = () => {
+  const { isTransitioning, targetTheme } = useHashiraTheme();
+  
+  return (
+    <motion.div 
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.8, ease: "easeOut" }}
+      className="min-h-screen bg-background overflow-x-hidden"
+    >
+      <ThemeTransitionOverlay isTransitioning={isTransitioning} targetTheme={targetTheme} />
+      <AtmosphericParticles />
+      <WisteriaDecoration />
+      <Navbar />
+      <main>
+        <HeroSection />
+        <SwordSlashTransition variant="water" />
+        <CharacterShowcase />
+        <SwordSlashTransition variant="flame" />
+        <ProductSection />
+        <Product3DViewerEnhanced />
+        <SwordSlashTransition variant="thunder" />
+        <FeaturesSection />
+        <CTASection />
+      </main>
+      <Footer />
+    </motion.div>
+  );
+};
 
 const Index = () => {
   return (
     <HashiraThemeProvider>
-      <motion.div 
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.8, ease: "easeOut" }}
-        className="min-h-screen bg-background overflow-x-hidden"
-      >
-        <AtmosphericParticles />
-        <WisteriaDecoration />
-        <Navbar />
-        <main>
-          <HeroSection />
-          <SwordSlashTransition variant="water" />
-          <CharacterShowcase />
-          <SwordSlashTransition variant="flame" />
-          <ProductSection />
-          <Product3DViewerEnhanced />
-          <SwordSlashTransition variant="thunder" />
-          <FeaturesSection />
-          <CTASection />
-        </main>
-        <Footer />
-      </motion.div>
+      <IndexContent />
     </HashiraThemeProvider>
   );
 };

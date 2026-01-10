@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, ReactNode, useEffect } from "react";
+import { createContext, useContext, useState, ReactNode, useEffect, useCallback } from "react";
 
 export type HashiraTheme = 
   | "tanjiro"
@@ -158,18 +158,41 @@ interface HashiraThemeContextType {
   setTheme: (theme: HashiraTheme) => void;
   colors: HashiraColors;
   themeInfo: typeof hashiraThemes[HashiraTheme];
+  isTransitioning: boolean;
+  targetTheme: HashiraTheme | null;
 }
 
 const HashiraThemeContext = createContext<HashiraThemeContextType | undefined>(undefined);
 
 export const HashiraThemeProvider = ({ children }: { children: ReactNode }) => {
-  const [theme, setTheme] = useState<HashiraTheme>(() => {
+  const [theme, setThemeState] = useState<HashiraTheme>(() => {
     const saved = localStorage.getItem("hashira-theme");
     return (saved as HashiraTheme) || "tanjiro";
   });
+  const [isTransitioning, setIsTransitioning] = useState(false);
+  const [targetTheme, setTargetTheme] = useState<HashiraTheme | null>(null);
 
   const themeInfo = hashiraThemes[theme];
   const colors = themeInfo.colors;
+
+  const setTheme = useCallback((newTheme: HashiraTheme) => {
+    if (newTheme === theme) return;
+    
+    // Start transition animation
+    setTargetTheme(newTheme);
+    setIsTransitioning(true);
+    
+    // Apply theme after a short delay for the animation to play
+    setTimeout(() => {
+      setThemeState(newTheme);
+    }, 300);
+    
+    // End transition
+    setTimeout(() => {
+      setIsTransitioning(false);
+      setTargetTheme(null);
+    }, 800);
+  }, [theme]);
 
   useEffect(() => {
     localStorage.setItem("hashira-theme", theme);
@@ -183,7 +206,7 @@ export const HashiraThemeProvider = ({ children }: { children: ReactNode }) => {
   }, [theme, colors]);
 
   return (
-    <HashiraThemeContext.Provider value={{ theme, setTheme, colors, themeInfo }}>
+    <HashiraThemeContext.Provider value={{ theme, setTheme, colors, themeInfo, isTransitioning, targetTheme }}>
       {children}
     </HashiraThemeContext.Provider>
   );
