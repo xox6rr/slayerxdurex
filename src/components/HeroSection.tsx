@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Flame, Shield } from "lucide-react";
 import NichirinBlade from "./NichirinBlade";
+import Hero3DScene from "./Hero3DScene";
 import { useHashiraTheme } from "@/contexts/HashiraThemeContext";
 
 const HeroSection = () => {
@@ -9,8 +10,11 @@ const HeroSection = () => {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      {/* 3D Background Scene */}
+      <Hero3DScene />
+      
       {/* Background layers */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[hsl(240,30%,8%)] via-background to-background" />
+      <div className="absolute inset-0 bg-gradient-to-b from-[hsl(240,30%,8%)/80] via-background/60 to-background pointer-events-none" />
       
       {/* Seigaiha wave pattern */}
       <div className="absolute inset-0 pattern-seigaiha" />

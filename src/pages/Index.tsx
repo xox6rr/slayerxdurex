@@ -3,14 +3,14 @@ import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import SwordSlashTransition from "@/components/SwordSlashTransition";
 import ProductSection from "@/components/ProductSection";
-import Product3DViewer from "@/components/Product3DViewer";
+import Product3DViewerEnhanced from "@/components/Product3DViewerEnhanced";
 import HashiraShowcase from "@/components/HashiraShowcase";
 import FeaturesSection from "@/components/FeaturesSection";
 import CTASection from "@/components/CTASection";
 import Footer from "@/components/Footer";
 import AtmosphericParticles from "@/components/AtmosphericParticles";
 import WisteriaDecoration from "@/components/WisteriaDecoration";
-import LoadingScreen from "@/components/LoadingScreen";
+import LoadingScreen3D from "@/components/LoadingScreen3D";
 import { HashiraThemeProvider } from "@/contexts/HashiraThemeContext";
 
 const Index = () => {
@@ -19,7 +19,7 @@ const Index = () => {
   return (
     <HashiraThemeProvider>
       <div className="min-h-screen bg-background overflow-x-hidden">
-        {isLoading && <LoadingScreen onLoadingComplete={() => setIsLoading(false)} />}
+        {isLoading && <LoadingScreen3D onLoadingComplete={() => setIsLoading(false)} />}
         
         {!isLoading && (
           <>
@@ -31,7 +31,7 @@ const Index = () => {
               <SwordSlashTransition variant="water" />
               <ProductSection />
               <SwordSlashTransition variant="flame" />
-              <Product3DViewer />
+              <Product3DViewerEnhanced />
               <SwordSlashTransition variant="thunder" />
               <HashiraShowcase />
               <SwordSlashTransition />
