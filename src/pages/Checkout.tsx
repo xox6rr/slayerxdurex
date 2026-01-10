@@ -4,11 +4,14 @@ import { useNavigate } from "react-router-dom";
 import { ArrowLeft, Check, CreditCard, Truck, Package, ChevronRight } from "lucide-react";
 import { useCart } from "@/contexts/CartContext";
 import { useHashiraTheme } from "@/contexts/HashiraThemeContext";
+import { useAuth } from "@/contexts/AuthContext";
+import { useOrders } from "@/hooks/useOrders";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { cn } from "@/lib/utils";
 import { z } from "zod";
+import { toast } from "sonner";
 
 const shippingSchema = z.object({
   firstName: z.string().min(1, "First name is required").max(50),
@@ -41,6 +44,8 @@ const Checkout = () => {
   const navigate = useNavigate();
   const { items, totalPrice, clearCart } = useCart();
   const { themeInfo } = useHashiraTheme();
+  const { user } = useAuth();
+  const { createOrder } = useOrders();
   
   const [currentStep, setCurrentStep] = useState(0);
   const [shippingData, setShippingData] = useState<ShippingData>({
@@ -109,11 +114,44 @@ const Checkout = () => {
 
   const handlePlaceOrder = async () => {
     setIsProcessing(true);
-    // Simulate order processing
-    await new Promise((resolve) => setTimeout(resolve, 2000));
-    setOrderComplete(true);
-    clearCart();
-    setIsProcessing(false);
+    
+    try {
+      if (user) {
+        // Save order to database for logged-in users
+        const order = await createOrder({
+          total_amount: finalTotal,
+          shipping_name: `${shippingData.firstName} ${shippingData.lastName}`,
+          shipping_email: shippingData.email,
+          shipping_address: shippingData.address,
+          shipping_city: shippingData.city,
+          shipping_postal_code: shippingData.postalCode,
+          shipping_country: shippingData.country,
+          items: items.map((item) => ({
+            product_id: item.id,
+            product_name: item.name,
+            product_image: item.image,
+            price: item.price,
+            quantity: item.quantity,
+            breathing_style: item.breathingStyle,
+          })),
+        });
+
+        if (order) {
+          toast.success("Order placed successfully!");
+        }
+      } else {
+        // Simulate order for guests
+        await new Promise((resolve) => setTimeout(resolve, 2000));
+        clearCart();
+      }
+      
+      setOrderComplete(true);
+    } catch (error) {
+      toast.error("Failed to place order. Please try again.");
+      console.error("Order error:", error);
+    } finally {
+      setIsProcessing(false);
+    }
   };
 
   const formatCardNumber = (value: string) => {

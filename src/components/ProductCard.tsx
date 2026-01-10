@@ -1,8 +1,10 @@
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { useRef, useState } from "react";
-import { ShoppingCart, Check } from "lucide-react";
+import { ShoppingCart, Check, Heart } from "lucide-react";
 import { useCart } from "@/contexts/CartContext";
+import { useWishlist } from "@/contexts/WishlistContext";
+import { useAuth } from "@/contexts/AuthContext";
 
 interface ProductCardProps {
   id: string;
@@ -75,6 +77,10 @@ const ProductCard = ({
   const [isHovered, setIsHovered] = useState(false);
   const [isAdding, setIsAdding] = useState(false);
   const { addItem } = useCart();
+  const { addItem: addToWishlist, removeItem: removeFromWishlist, isInWishlist } = useWishlist();
+  const { user } = useAuth();
+
+  const isWishlisted = isInWishlist(id);
 
   const handleAddToCart = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -91,6 +97,15 @@ const ProductCard = ({
     });
 
     setTimeout(() => setIsAdding(false), 1000);
+  };
+
+  const handleWishlistToggle = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (isWishlisted) {
+      removeFromWishlist(id);
+    } else {
+      addToWishlist({ id, name, price, image, breathingStyle });
+    }
   };
 
   const formatPrice = (price: number) => `¥${price.toLocaleString()}`;
@@ -128,6 +143,22 @@ const ProductCard = ({
           
           {/* Gradient overlay */}
           <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent" />
+          
+          {/* Wishlist Heart Button */}
+          <motion.button
+            onClick={handleWishlistToggle}
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+            className={cn(
+              "absolute top-4 left-4 p-2 rounded-full backdrop-blur-sm transition-all z-10",
+              isWishlisted 
+                ? "bg-red-500/20 text-red-500" 
+                : "bg-black/30 text-white/70 hover:text-white"
+            )}
+            aria-label={isWishlisted ? "Remove from wishlist" : "Add to wishlist"}
+          >
+            <Heart className={cn("w-5 h-5", isWishlisted && "fill-current")} />
+          </motion.button>
           
           {/* Kanji watermark on image */}
           <motion.div 
