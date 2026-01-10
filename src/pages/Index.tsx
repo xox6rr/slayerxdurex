@@ -11,11 +11,10 @@ import AtmosphericParticles from "@/components/AtmosphericParticles";
 import WisteriaDecoration from "@/components/WisteriaDecoration";
 import ThemeTransitionOverlay from "@/components/ThemeTransitionOverlay";
 import CartDrawer from "@/components/CartDrawer";
-import { HashiraThemeProvider, useHashiraTheme } from "@/contexts/HashiraThemeContext";
-import { CartProvider } from "@/contexts/CartContext";
+import { useHashiraTheme } from "@/contexts/HashiraThemeContext";
 import { motion } from "framer-motion";
 
-const IndexContent = () => {
+const Index = () => {
   const { isTransitioning, targetTheme } = useHashiraTheme();
   
   return (
@@ -43,16 +42,6 @@ const IndexContent = () => {
       </main>
       <Footer />
     </motion.div>
-  );
-};
-
-const Index = () => {
-  return (
-    <HashiraThemeProvider>
-      <CartProvider>
-        <IndexContent />
-      </CartProvider>
-    </HashiraThemeProvider>
   );
 };
 
