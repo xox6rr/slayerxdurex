@@ -1,14 +1,17 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, Sparkles, ShoppingCart } from "lucide-react";
+import { Menu, Sparkles, ShoppingCart, User, LogIn } from "lucide-react";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { useHashiraTheme } from "@/contexts/HashiraThemeContext";
 import { useCart } from "@/contexts/CartContext";
+import { useAuth } from "@/contexts/AuthContext";
 import HashiraSelector from "./HashiraSelector";
 
 const Navbar = () => {
   const [isSelectorOpen, setIsSelectorOpen] = useState(false);
   const { themeInfo } = useHashiraTheme();
   const { totalItems, openCart } = useCart();
+  const { user, profile, loading } = useAuth();
 
   return (
     <>
@@ -128,6 +131,40 @@ const Navbar = () => {
                   )}
                 </AnimatePresence>
               </motion.button>
+
+              {/* User Auth */}
+              {!loading && (
+                user ? (
+                  <Link to="/profile">
+                    <motion.div
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                      className="flex items-center gap-2 px-3 py-2 rounded-lg border border-border hover:bg-muted/50 transition-colors"
+                    >
+                      <div 
+                        className="w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold text-white"
+                        style={{ background: themeInfo.colors.gradient }}
+                      >
+                        {profile?.display_name?.charAt(0)?.toUpperCase() || user.email?.charAt(0)?.toUpperCase() || "S"}
+                      </div>
+                      <span className="hidden lg:block text-sm text-foreground font-medium truncate max-w-[80px]">
+                        {profile?.display_name || "Slayer"}
+                      </span>
+                    </motion.div>
+                  </Link>
+                ) : (
+                  <Link to="/login">
+                    <motion.div
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                      className="flex items-center gap-2 px-3 py-2 rounded-lg border border-border hover:bg-muted/50 transition-colors"
+                    >
+                      <LogIn className="w-4 h-4 text-foreground" />
+                      <span className="hidden sm:block text-sm text-foreground">Login</span>
+                    </motion.div>
+                  </Link>
+                )
+              )}
 
               {/* CTA */}
               <motion.a
