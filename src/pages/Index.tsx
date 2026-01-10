@@ -1,6 +1,9 @@
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
+import SwordSlashTransition from "@/components/SwordSlashTransition";
 import ProductSection from "@/components/ProductSection";
+import Product3DViewer from "@/components/Product3DViewer";
+import HashiraShowcase from "@/components/HashiraShowcase";
 import FeaturesSection from "@/components/FeaturesSection";
 import CTASection from "@/components/CTASection";
 import Footer from "@/components/Footer";
@@ -13,7 +16,13 @@ const Index = () => {
       <Navbar />
       <main>
         <HeroSection />
+        <SwordSlashTransition />
         <ProductSection />
+        <SwordSlashTransition />
+        <Product3DViewer />
+        <SwordSlashTransition />
+        <HashiraShowcase />
+        <SwordSlashTransition />
         <FeaturesSection />
         <CTASection />
       </main>
