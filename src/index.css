@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700;900&family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700;900&family=Shippori+Mincho:wght@400;600;700;800&family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -6,71 +6,87 @@
 
 @layer base {
   :root {
-    /* Dark mystical base */
-    --background: 240 10% 4%;
+    /* Demon Slayer Dark Theme */
+    --background: 240 25% 3%;
     --foreground: 0 0% 95%;
 
-    --card: 240 10% 8%;
+    --card: 240 20% 6%;
     --card-foreground: 0 0% 95%;
 
-    --popover: 240 10% 6%;
+    --popover: 240 20% 5%;
     --popover-foreground: 0 0% 95%;
 
-    /* Crimson red - Demon Slayer */
-    --primary: 0 85% 50%;
+    /* Crimson Blood Red */
+    --primary: 0 85% 45%;
     --primary-foreground: 0 0% 100%;
 
-    /* Deep purple - Durex brand */
-    --secondary: 280 60% 35%;
+    /* Demon Slayer Corps Green */
+    --secondary: 160 70% 25%;
     --secondary-foreground: 0 0% 100%;
 
     /* Muted mystical */
-    --muted: 240 10% 15%;
-    --muted-foreground: 240 5% 65%;
+    --muted: 240 15% 12%;
+    --muted-foreground: 240 5% 60%;
 
-    /* Cherry blossom pink */
-    --accent: 330 80% 75%;
-    --accent-foreground: 240 10% 4%;
+    /* Wisteria Purple */
+    --accent: 270 60% 65%;
+    --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 240 10% 20%;
-    --input: 240 10% 15%;
-    --ring: 0 85% 50%;
+    --border: 240 15% 15%;
+    --input: 240 15% 12%;
+    --ring: 180 70% 50%;
 
     --radius: 0.75rem;
 
-    /* Custom theme colors */
-    --crimson: 0 85% 50%;
-    --crimson-glow: 0 100% 60%;
-    --sakura: 330 80% 75%;
-    --sakura-light: 330 90% 85%;
-    --midnight: 240 10% 4%;
-    --mist: 200 20% 90%;
-    --gold: 45 100% 60%;
-    --nichirin-blue: 200 80% 50%;
-    --nichirin-glow: 200 100% 70%;
-
+    /* Nichirin Blade Colors */
+    --nichirin-teal: 180 80% 45%;
+    --nichirin-purple: 270 70% 55%;
+    --nichirin-pink: 330 80% 65%;
+    
+    /* Breathing Style Colors */
+    --water-blue: 200 90% 55%;
+    --flame-orange: 25 95% 55%;
+    --thunder-yellow: 50 100% 55%;
+    --mist-gray: 200 20% 70%;
+    --wind-green: 150 60% 45%;
+    --insect-purple: 280 70% 60%;
+    --love-pink: 340 80% 65%;
+    --serpent-lavender: 260 50% 60%;
+    --sound-coral: 15 80% 60%;
+    --stone-brown: 30 30% 45%;
+    
+    /* Tanjiro's Colors */
+    --tanjiro-green: 160 50% 30%;
+    --tanjiro-black: 0 0% 8%;
+    
+    /* Nezuko's Colors */
+    --nezuko-pink: 350 70% 65%;
+    --nezuko-bamboo: 40 40% 50%;
+    
+    /* Atmospheric */
+    --moon-glow: 45 30% 85%;
+    --sakura: 340 80% 80%;
+    --wisteria: 270 60% 70%;
+    --ember-orange: 20 100% 55%;
+    --mist-white: 200 20% 90%;
+    
     /* Gradients */
-    --gradient-crimson: linear-gradient(135deg, hsl(0 85% 50%), hsl(340 80% 45%));
-    --gradient-midnight: linear-gradient(180deg, hsl(240 10% 4%), hsl(240 15% 8%));
-    --gradient-sakura: linear-gradient(135deg, hsl(330 80% 75%), hsl(350 70% 65%));
-    --gradient-glow: radial-gradient(ellipse at center, hsl(0 85% 50% / 0.3), transparent 70%);
+    --gradient-nichirin: linear-gradient(135deg, hsl(180 80% 45%), hsl(270 70% 55%), hsl(330 80% 65%));
+    --gradient-blood: linear-gradient(180deg, hsl(0 85% 45%), hsl(0 70% 25%));
+    --gradient-night: linear-gradient(180deg, hsl(240 30% 8%), hsl(240 25% 3%));
+    --gradient-moon: radial-gradient(ellipse at 80% 20%, hsl(45 30% 85% / 0.15), transparent 50%);
 
-    /* Shadows */
-    --shadow-crimson: 0 0 40px hsl(0 85% 50% / 0.4);
-    --shadow-sakura: 0 0 30px hsl(330 80% 75% / 0.3);
-    --shadow-card: 0 25px 50px -12px hsl(0 0% 0% / 0.5);
-
-    --sidebar-background: 240 10% 6%;
+    --sidebar-background: 240 20% 5%;
     --sidebar-foreground: 0 0% 95%;
-    --sidebar-primary: 0 85% 50%;
+    --sidebar-primary: 0 85% 45%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 280 60% 35%;
+    --sidebar-accent: 270 60% 65%;
     --sidebar-accent-foreground: 0 0% 100%;
-    --sidebar-border: 240 10% 20%;
-    --sidebar-ring: 0 85% 50%;
+    --sidebar-border: 240 15% 15%;
+    --sidebar-ring: 180 70% 50%;
   }
 }
 
@@ -85,6 +101,11 @@
   }
 
   h1, h2, h3, h4, h5, h6 {
+    font-family: 'Shippori Mincho', serif;
+    letter-spacing: 0.02em;
+  }
+
+  .font-display {
     font-family: 'Bebas Neue', sans-serif;
     letter-spacing: 0.05em;
   }
@@ -92,49 +113,106 @@
   .font-japanese {
     font-family: 'Noto Serif JP', serif;
   }
+
+  .font-brush {
+    font-family: 'Shippori Mincho', serif;
+    font-weight: 800;
+  }
+}
+
+/* Seigaiha Wave Pattern */
+.pattern-seigaiha {
+  background-image: 
+    radial-gradient(circle at 100% 150%, transparent 24%, hsl(var(--border)) 25%, hsl(var(--border)) 28%, transparent 29%, transparent),
+    radial-gradient(circle at 0% 150%, transparent 24%, hsl(var(--border)) 25%, hsl(var(--border)) 28%, transparent 29%, transparent),
+    radial-gradient(circle at 100% 0%, transparent 24%, hsl(var(--border)) 25%, hsl(var(--border)) 28%, transparent 29%, transparent),
+    radial-gradient(circle at 0% 0%, transparent 24%, hsl(var(--border)) 25%, hsl(var(--border)) 28%, transparent 29%, transparent);
+  background-size: 60px 60px;
+  background-position: 0 0, 30px 0, 30px -30px, 0 30px;
+  opacity: 0.15;
+}
+
+/* Tanjiro Checkered Pattern */
+.pattern-checkered {
+  background-image: 
+    linear-gradient(45deg, hsl(var(--tanjiro-green)) 25%, transparent 25%),
+    linear-gradient(-45deg, hsl(var(--tanjiro-green)) 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, hsl(var(--tanjiro-black)) 75%),
+    linear-gradient(-45deg, transparent 75%, hsl(var(--tanjiro-black)) 75%);
+  background-size: 40px 40px;
+  background-position: 0 0, 0 20px, 20px -20px, -20px 0px;
+  opacity: 0.08;
 }
 
 @layer components {
+  .text-gradient-nichirin {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, hsl(180 80% 55%), hsl(270 70% 60%), hsl(330 80% 70%));
+  }
+
   .text-gradient-crimson {
     @apply bg-clip-text text-transparent;
     background-image: linear-gradient(135deg, hsl(0 85% 55%), hsl(340 80% 50%));
   }
 
-  .text-gradient-sakura {
+  .text-gradient-flame {
     @apply bg-clip-text text-transparent;
-    background-image: linear-gradient(135deg, hsl(330 80% 75%), hsl(350 70% 65%));
+    background-image: linear-gradient(135deg, hsl(50 100% 55%), hsl(25 95% 55%), hsl(0 85% 50%));
   }
 
-  .glow-crimson {
-    box-shadow: 0 0 40px hsl(0 85% 50% / 0.4), 0 0 80px hsl(0 85% 50% / 0.2);
-  }
-
-  .glow-sakura {
-    box-shadow: 0 0 30px hsl(330 80% 75% / 0.3);
+  .text-gradient-water {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, hsl(200 90% 65%), hsl(220 80% 55%));
   }
 
   .glow-nichirin {
-    box-shadow: 0 0 40px hsl(200 80% 50% / 0.5), 0 0 80px hsl(200 100% 70% / 0.3);
+    box-shadow: 
+      0 0 30px hsl(180 80% 45% / 0.4),
+      0 0 60px hsl(270 70% 55% / 0.3),
+      0 0 90px hsl(330 80% 65% / 0.2);
+  }
+
+  .glow-crimson {
+    box-shadow: 0 0 40px hsl(0 85% 45% / 0.5), 0 0 80px hsl(0 85% 45% / 0.2);
+  }
+
+  .glow-water {
+    box-shadow: 0 0 40px hsl(200 90% 55% / 0.5);
+  }
+
+  .glow-flame {
+    box-shadow: 0 0 40px hsl(25 95% 55% / 0.5);
+  }
+
+  .glow-thunder {
+    box-shadow: 0 0 40px hsl(50 100% 55% / 0.5);
+  }
+
+  .glow-moon {
+    box-shadow: 0 0 100px hsl(45 30% 85% / 0.3);
   }
 
   .glass-dark {
     @apply backdrop-blur-xl;
-    background: hsl(240 10% 8% / 0.8);
-    border: 1px solid hsl(240 10% 20% / 0.5);
+    background: hsl(240 20% 6% / 0.85);
+    border: 1px solid hsl(240 15% 20% / 0.5);
   }
 
-  .card-glow {
-    @apply relative overflow-hidden;
+  .mist-effect {
+    background: linear-gradient(to top, hsl(200 20% 90% / 0.1), transparent);
+    mask-image: linear-gradient(to top, black, transparent);
   }
 
-  .card-glow::before {
-    content: '';
-    @apply absolute inset-0 opacity-0 transition-opacity duration-500;
-    background: radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), hsl(0 85% 50% / 0.1), transparent 40%);
+  .wisteria-shadow {
+    filter: drop-shadow(0 0 20px hsl(270 60% 70% / 0.5));
   }
 
-  .card-glow:hover::before {
-    @apply opacity-100;
+  .breathing-pulse {
+    animation: breathingPulse 4s ease-in-out infinite;
+  }
+
+  .demon-mark {
+    background: linear-gradient(135deg, hsl(0 85% 45%), hsl(330 70% 40%));
   }
 }
 
@@ -143,73 +221,106 @@
     animation: float 6s ease-in-out infinite;
   }
 
-  .animate-float-delayed {
-    animation: float 6s ease-in-out infinite;
-    animation-delay: -3s;
+  .animate-nichirin-glow {
+    animation: nichirinGlow 3s ease-in-out infinite;
   }
 
-  .animate-glow-pulse {
-    animation: glowPulse 3s ease-in-out infinite;
+  .animate-ember-rise {
+    animation: emberRise 4s ease-out infinite;
   }
 
-  .animate-sakura-fall {
-    animation: sakuraFall 10s linear infinite;
+  .animate-wisteria-sway {
+    animation: wisteriaSway 8s ease-in-out infinite;
   }
 
-  .animate-sword-reveal {
-    animation: swordReveal 1.5s ease-out forwards;
+  .animate-moon-pulse {
+    animation: moonPulse 6s ease-in-out infinite;
+  }
+
+  .animate-breathing {
+    animation: breathingPulse 4s ease-in-out infinite;
   }
 
   .animate-slash {
-    animation: slash 0.6s ease-out;
+    animation: swordSlash 0.5s ease-out;
   }
 }
 
 @keyframes float {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-20px) rotate(2deg); }
+}
+
+@keyframes nichirinGlow {
   0%, 100% {
-    transform: translateY(0) rotate(0deg);
+    filter: drop-shadow(0 0 20px hsl(180 80% 45% / 0.6)) 
+            drop-shadow(0 0 40px hsl(270 70% 55% / 0.4));
   }
   50% {
-    transform: translateY(-20px) rotate(3deg);
+    filter: drop-shadow(0 0 30px hsl(180 80% 55% / 0.8)) 
+            drop-shadow(0 0 60px hsl(330 80% 65% / 0.5));
   }
 }
 
-@keyframes glowPulse {
-  0%, 100% {
-    opacity: 0.5;
-    filter: blur(20px);
+@keyframes emberRise {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100px) scale(0);
+    opacity: 0;
+  }
+}
+
+@keyframes wisteriaSway {
+  0%, 100% { transform: rotate(-2deg) translateX(0); }
+  50% { transform: rotate(2deg) translateX(10px); }
+}
+
+@keyframes moonPulse {
+  0%, 100% { opacity: 0.6; filter: blur(40px); }
+  50% { opacity: 0.9; filter: blur(50px); }
+}
+
+@keyframes breathingPulse {
+  0%, 100% { 
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  50% { 
+    transform: scale(1.05);
+    opacity: 1;
+  }
+}
+
+@keyframes swordSlash {
+  0% {
+    clip-path: polygon(0 50%, 0 50%, 0 50%, 0 50%);
+    opacity: 1;
   }
   50% {
-    opacity: 0.8;
-    filter: blur(30px);
+    clip-path: polygon(0 45%, 100% 40%, 100% 60%, 0 55%);
+    opacity: 1;
+  }
+  100% {
+    clip-path: polygon(0 45%, 100% 40%, 100% 60%, 0 55%);
+    opacity: 0;
   }
 }
 
 @keyframes sakuraFall {
   0% {
-    transform: translateY(-100vh) rotate(0deg) translateX(0);
+    transform: translateY(-10vh) rotate(0deg) translateX(0);
     opacity: 0;
   }
-  10% {
-    opacity: 1;
-  }
-  90% {
-    opacity: 1;
-  }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
   100% {
-    transform: translateY(100vh) rotate(720deg) translateX(100px);
+    transform: translateY(110vh) rotate(720deg) translateX(100px);
     opacity: 0;
   }
 }
-
-@keyframes swordReveal {
-  0% {
-    transform: translateY(100px) rotate(-45deg) scale(0.8);
-    opacity: 0;
-  }
-  60% {
-    transform: translateY(-10px) rotate(5deg) scale(1.05);
-  }
   100% {
     transform: translateY(0) rotate(0deg) scale(1);
     opacity: 1;
