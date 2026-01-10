@@ -7,20 +7,22 @@ import HashiraShowcase from "@/components/HashiraShowcase";
 import FeaturesSection from "@/components/FeaturesSection";
 import CTASection from "@/components/CTASection";
 import Footer from "@/components/Footer";
-import SakuraParticles from "@/components/SakuraParticles";
+import AtmosphericParticles from "@/components/AtmosphericParticles";
+import WisteriaDecoration from "@/components/WisteriaDecoration";
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-background">
-      <SakuraParticles />
+    <div className="min-h-screen bg-background overflow-x-hidden">
+      <AtmosphericParticles />
+      <WisteriaDecoration />
       <Navbar />
       <main>
         <HeroSection />
-        <SwordSlashTransition />
+        <SwordSlashTransition variant="water" />
         <ProductSection />
-        <SwordSlashTransition />
+        <SwordSlashTransition variant="flame" />
         <Product3DViewer />
-        <SwordSlashTransition />
+        <SwordSlashTransition variant="thunder" />
         <HashiraShowcase />
         <SwordSlashTransition />
         <FeaturesSection />

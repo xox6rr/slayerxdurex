@@ -8,9 +8,12 @@ const CTASection = () => {
       {/* Background */}
       <div className="absolute inset-0 bg-gradient-to-b from-background via-card to-background" />
       
+      {/* Seigaiha pattern */}
+      <div className="absolute inset-0 pattern-seigaiha opacity-10" />
+      
       {/* Glows */}
-      <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-primary/20 rounded-full blur-[120px]" />
-      <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-secondary/20 rounded-full blur-[120px]" />
+      <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-primary opacity-10 rounded-full blur-[150px]" />
+      <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-[hsl(270,60%,50%)] opacity-10 rounded-full blur-[150px]" />
 
       <div className="container relative z-10 px-4">
         <motion.div
@@ -19,26 +22,40 @@ const CTASection = () => {
           viewport={{ once: true }}
           className="max-w-4xl mx-auto text-center"
         >
-          {/* Icon */}
+          {/* Demon Slayer Corps Symbol */}
           <motion.div
             animate={{ rotate: [0, 5, -5, 0] }}
-            transition={{ duration: 4, repeat: Infinity }}
-            className="inline-flex items-center justify-center w-24 h-24 rounded-full bg-muted mb-8"
+            transition={{ duration: 6, repeat: Infinity }}
+            className="inline-flex items-center justify-center w-28 h-28 rounded-full bg-gradient-to-br from-[hsl(160,70%,30%)] to-[hsl(160,70%,20%)] mb-8 border-4 border-[hsl(160,60%,40%)] relative"
           >
-            <Sword className="w-12 h-12 text-primary" />
+            <span className="font-japanese text-4xl text-foreground">滅</span>
+            <motion.div
+              className="absolute inset-0 rounded-full border-2 border-[hsl(160,60%,50%)]"
+              animate={{ scale: [1, 1.3, 1], opacity: [0.5, 0, 0.5] }}
+              transition={{ duration: 2, repeat: Infinity }}
+            />
           </motion.div>
 
+          {/* Japanese title */}
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="font-japanese text-2xl text-[hsl(270,60%,70%)] mb-4"
+          >
+            鬼殺隊に入隊せよ
+          </motion.p>
+
           {/* Title */}
-          <h2 className="font-display text-5xl md:text-6xl lg:text-7xl mb-6">
-            <span className="text-foreground">BECOME A</span>
+          <h2 className="font-brush text-5xl md:text-6xl lg:text-7xl mb-6">
+            <span className="text-foreground">JOIN THE</span>
             <br />
-            <span className="text-gradient-crimson">DEMON SLAYER</span>
+            <span className="text-gradient-nichirin">DEMON SLAYER CORPS</span>
           </h2>
 
           {/* Description */}
-          <p className="text-muted-foreground text-lg md:text-xl max-w-2xl mx-auto mb-10">
-            Join the ranks of elite warriors who trust only the best protection. 
-            Your journey to becoming a Hashira starts here.
+          <p className="text-muted-foreground text-lg md:text-xl max-w-2xl mx-auto mb-10 font-japanese">
+            全集中・常中 — Achieve Total Concentration Breathing and join the ranks of elite warriors who trust only the best protection.
           </p>
 
           {/* CTA Button */}
@@ -48,9 +65,9 @@ const CTASection = () => {
           >
             <Button
               size="lg"
-              className="glow-crimson text-xl px-12 py-8 font-display tracking-widest group"
+              className="glow-nichirin text-xl px-12 py-8 font-display tracking-widest group bg-gradient-to-r from-[hsl(180,80%,40%)] via-[hsl(270,70%,50%)] to-[hsl(330,80%,55%)] hover:opacity-90 breathing-pulse"
             >
-              SHOP THE COLLECTION
+              全集中 • SHOP THE COLLECTION
               <ArrowRight className="w-5 h-5 ml-3 transition-transform group-hover:translate-x-1" />
             </Button>
           </motion.div>
@@ -61,20 +78,23 @@ const CTASection = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.3 }}
-            className="flex flex-wrap items-center justify-center gap-8 mt-12 text-muted-foreground text-sm"
+            className="flex flex-wrap items-center justify-center gap-8 mt-12"
           >
-            <span className="flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-primary" />
-              Free Shipping
-            </span>
-            <span className="flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-nichirin" />
-              Discreet Packaging
-            </span>
-            <span className="flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-sakura" />
-              100% Satisfaction
-            </span>
+            {[
+              { kanji: "水", text: "Free Shipping", color: "hsl(200, 90%, 55%)" },
+              { kanji: "隠", text: "Discreet Packaging", color: "hsl(270, 60%, 60%)" },
+              { kanji: "満", text: "100% Satisfaction", color: "hsl(340, 80%, 60%)" },
+            ].map((badge) => (
+              <span key={badge.text} className="flex items-center gap-2 text-muted-foreground text-sm">
+                <span 
+                  className="w-6 h-6 rounded-full flex items-center justify-center font-japanese text-xs"
+                  style={{ backgroundColor: `${badge.color}30`, color: badge.color }}
+                >
+                  {badge.kanji}
+                </span>
+                {badge.text}
+              </span>
+            ))}
           </motion.div>
         </motion.div>
       </div>
