@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
-import { User, Mail, Sword, LogOut, Save, ArrowLeft } from "lucide-react";
+import { User, Mail, Sword, LogOut, Save, ArrowLeft, Package, Heart } from "lucide-react";
 import { z } from "zod";
 
 const profileSchema = z.object({
@@ -208,6 +208,18 @@ const Profile = () => {
                   </motion.button>
                 ))}
               </div>
+            </div>
+
+            {/* Quick Links */}
+            <div className="flex flex-col sm:flex-row gap-3 mb-6">
+              <Button
+                variant="outline"
+                onClick={() => navigate("/orders")}
+                className="flex-1 py-5 gap-2"
+              >
+                <Package className="w-4 h-4" />
+                View Orders
+              </Button>
             </div>
 
             {/* Actions */}

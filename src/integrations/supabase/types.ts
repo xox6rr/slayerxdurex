@@ -14,6 +14,137 @@ export type Database = {
   }
   public: {
     Tables: {
+      cart_items: {
+        Row: {
+          breathing_style: string | null
+          created_at: string
+          id: string
+          price: number
+          product_id: string
+          product_image: string | null
+          product_name: string
+          quantity: number
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          breathing_style?: string | null
+          created_at?: string
+          id?: string
+          price: number
+          product_id: string
+          product_image?: string | null
+          product_name: string
+          quantity?: number
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          breathing_style?: string | null
+          created_at?: string
+          id?: string
+          price?: number
+          product_id?: string
+          product_image?: string | null
+          product_name?: string
+          quantity?: number
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      order_items: {
+        Row: {
+          breathing_style: string | null
+          created_at: string
+          id: string
+          order_id: string
+          price: number
+          product_id: string
+          product_image: string | null
+          product_name: string
+          quantity: number
+        }
+        Insert: {
+          breathing_style?: string | null
+          created_at?: string
+          id?: string
+          order_id: string
+          price: number
+          product_id: string
+          product_image?: string | null
+          product_name: string
+          quantity: number
+        }
+        Update: {
+          breathing_style?: string | null
+          created_at?: string
+          id?: string
+          order_id?: string
+          price?: number
+          product_id?: string
+          product_image?: string | null
+          product_name?: string
+          quantity?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "order_items_order_id_fkey"
+            columns: ["order_id"]
+            isOneToOne: false
+            referencedRelation: "orders"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      orders: {
+        Row: {
+          created_at: string
+          id: string
+          notes: string | null
+          shipping_address: string
+          shipping_city: string
+          shipping_country: string
+          shipping_email: string
+          shipping_name: string
+          shipping_postal_code: string
+          status: Database["public"]["Enums"]["order_status"]
+          total_amount: number
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          notes?: string | null
+          shipping_address: string
+          shipping_city: string
+          shipping_country?: string
+          shipping_email: string
+          shipping_name: string
+          shipping_postal_code: string
+          status?: Database["public"]["Enums"]["order_status"]
+          total_amount: number
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          notes?: string | null
+          shipping_address?: string
+          shipping_city?: string
+          shipping_country?: string
+          shipping_email?: string
+          shipping_name?: string
+          shipping_postal_code?: string
+          status?: Database["public"]["Enums"]["order_status"]
+          total_amount?: number
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           avatar_url: string | null
@@ -44,6 +175,39 @@ export type Database = {
         }
         Relationships: []
       }
+      wishlist: {
+        Row: {
+          breathing_style: string | null
+          created_at: string
+          id: string
+          price: number
+          product_id: string
+          product_image: string | null
+          product_name: string
+          user_id: string
+        }
+        Insert: {
+          breathing_style?: string | null
+          created_at?: string
+          id?: string
+          price: number
+          product_id: string
+          product_image?: string | null
+          product_name: string
+          user_id: string
+        }
+        Update: {
+          breathing_style?: string | null
+          created_at?: string
+          id?: string
+          price?: number
+          product_id?: string
+          product_image?: string | null
+          product_name?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
@@ -52,7 +216,12 @@ export type Database = {
       [_ in never]: never
     }
     Enums: {
-      [_ in never]: never
+      order_status:
+        | "pending"
+        | "processing"
+        | "shipped"
+        | "delivered"
+        | "cancelled"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -179,6 +348,14 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      order_status: [
+        "pending",
+        "processing",
+        "shipped",
+        "delivered",
+        "cancelled",
+      ],
+    },
   },
 } as const
