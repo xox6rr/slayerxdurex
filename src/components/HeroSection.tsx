@@ -38,8 +38,7 @@ const HeroSection = () => {
     offset: ["start start", "end start"]
   });
   
-  const characterY = useTransform(scrollYProgress, [0, 1], ["0%", "25%"]);
-  const characterScale = useTransform(scrollYProgress, [0, 1], [1, 1.15]);
+  const characterY = useTransform(scrollYProgress, [0, 1], ["0%", "15%"]);
 
   const currentCharacterImg = themeCharacterMap[theme];
 
@@ -75,90 +74,74 @@ const HeroSection = () => {
       {/* Breathing Style Particles */}
       <BreathingStyleParticles />
 
-      {/* Dynamic Character Background with Parallax - CENTERED & LARGER */}
+      {/* Dynamic Character Background - FULLSCREEN */}
       <AnimatePresence mode="wait">
         <motion.div
           key={theme}
-          initial={{ opacity: 0, scale: 1.3, y: 80 }}
-          animate={{ opacity: 1, scale: 1, y: 0 }}
-          exit={{ opacity: 0, scale: 0.85, y: -50 }}
-          transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
-          className="absolute inset-0 flex items-end justify-center pointer-events-none"
+          initial={{ opacity: 0, scale: 1.1 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0, scale: 0.95 }}
+          transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
+          className="absolute inset-0 pointer-events-none overflow-hidden"
           style={{ y: characterY }}
         >
-          {/* Character container - LARGER */}
-          <motion.div 
-            className="relative w-full h-full max-w-5xl"
-            style={{ scale: characterScale }}
+          {/* Breathing animation wrapper */}
+          <motion.div
+            animate={{ 
+              scale: [1, 1.015, 1],
+            }}
+            transition={{ 
+              duration: 4, 
+              repeat: Infinity, 
+              ease: "easeInOut" 
+            }}
+            className="absolute inset-0 flex items-center justify-center"
           >
-            {/* Breathing animation wrapper */}
-            <motion.div
-              animate={{ 
-                scale: [1, 1.02, 1],
-                y: [0, -5, 0],
-              }}
-              transition={{ 
-                duration: 4, 
-                repeat: Infinity, 
-                ease: "easeInOut" 
-              }}
-              className="absolute inset-0"
-            >
-              <motion.img 
-                src={currentCharacterImg} 
-                alt={themeInfo.name}
-                className="absolute bottom-0 left-1/2 -translate-x-1/2 w-auto h-[105%] max-h-[1000px] object-contain"
-                style={{
-                  opacity: 0.5,
-                  maskImage: 'radial-gradient(ellipse 85% 95% at 50% 85%, rgba(0,0,0,1) 0%, rgba(0,0,0,0.6) 40%, rgba(0,0,0,0.3) 60%, transparent 80%)',
-                  WebkitMaskImage: 'radial-gradient(ellipse 85% 95% at 50% 85%, rgba(0,0,0,1) 0%, rgba(0,0,0,0.6) 40%, rgba(0,0,0,0.3) 60%, transparent 80%)',
-                  filter: `drop-shadow(0 0 120px hsl(${themeInfo.colors.glow} / 0.5)) drop-shadow(0 0 250px hsl(${themeInfo.colors.primary} / 0.3))`,
-                }}
-              />
-            </motion.div>
-            
-            {/* Pulsing aura effect */}
-            <motion.div 
-              className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[140%] h-[90%] opacity-40 blur-[120px]"
-              animate={{
-                opacity: [0.3, 0.5, 0.3],
-                scale: [1, 1.1, 1],
-              }}
-              transition={{
-                duration: 3,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
-              style={{ 
-                background: `radial-gradient(ellipse at 50% 100%, hsl(${themeInfo.colors.primary} / 0.7), hsl(${themeInfo.colors.glow} / 0.4) 30%, hsl(${themeInfo.colors.accent} / 0.2) 50%, transparent 70%)` 
-              }}
-            />
-            
-            {/* Inner glow ring */}
-            <motion.div
-              className="absolute bottom-[10%] left-1/2 -translate-x-1/2 w-[60%] h-[50%] rounded-full opacity-20"
-              animate={{
-                boxShadow: [
-                  `0 0 60px 30px hsl(${themeInfo.colors.primary} / 0.3)`,
-                  `0 0 100px 50px hsl(${themeInfo.colors.glow} / 0.4)`,
-                  `0 0 60px 30px hsl(${themeInfo.colors.primary} / 0.3)`,
-                ],
-              }}
-              transition={{
-                duration: 2,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
-            />
-            
-            {/* Bottom gradient fade */}
-            <div 
-              className="absolute bottom-0 left-0 right-0 h-48 pointer-events-none"
+            <motion.img 
+              src={currentCharacterImg} 
+              alt={themeInfo.name}
+              className="w-auto h-full min-h-screen object-cover object-top"
               style={{
-                background: 'linear-gradient(to top, hsl(var(--background)), hsl(var(--background) / 0.5), transparent)'
+                opacity: 0.55,
+                minWidth: '100%',
+                maskImage: 'radial-gradient(ellipse 100% 100% at 50% 50%, rgba(0,0,0,1) 0%, rgba(0,0,0,0.7) 50%, rgba(0,0,0,0.3) 75%, transparent 95%)',
+                WebkitMaskImage: 'radial-gradient(ellipse 100% 100% at 50% 50%, rgba(0,0,0,1) 0%, rgba(0,0,0,0.7) 50%, rgba(0,0,0,0.3) 75%, transparent 95%)',
+                filter: `drop-shadow(0 0 150px hsl(${themeInfo.colors.glow} / 0.6))`,
               }}
             />
           </motion.div>
+          
+          {/* Pulsing aura effect */}
+          <motion.div 
+            className="absolute inset-0 opacity-30"
+            animate={{
+              opacity: [0.2, 0.35, 0.2],
+            }}
+            transition={{
+              duration: 3,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+            style={{ 
+              background: `radial-gradient(ellipse at 50% 50%, hsl(${themeInfo.colors.primary} / 0.5), hsl(${themeInfo.colors.glow} / 0.3) 40%, transparent 70%)` 
+            }}
+          />
+          
+          {/* Bottom gradient fade */}
+          <div 
+            className="absolute bottom-0 left-0 right-0 h-64 pointer-events-none"
+            style={{
+              background: 'linear-gradient(to top, hsl(var(--background)), hsl(var(--background) / 0.7), transparent)'
+            }}
+          />
+          
+          {/* Top gradient fade for navbar */}
+          <div 
+            className="absolute top-0 left-0 right-0 h-32 pointer-events-none"
+            style={{
+              background: 'linear-gradient(to bottom, hsl(var(--background) / 0.5), transparent)'
+            }}
+          />
         </motion.div>
       </AnimatePresence>
 
