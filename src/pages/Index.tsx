@@ -3,7 +3,6 @@ import HeroSection from "@/components/HeroSection";
 import SwordSlashTransition from "@/components/SwordSlashTransition";
 import ProductSection from "@/components/ProductSection";
 import Product3DViewerEnhanced from "@/components/Product3DViewerEnhanced";
-import HashiraShowcase from "@/components/HashiraShowcase";
 import CharacterShowcase from "@/components/CharacterShowcase";
 import FeaturesSection from "@/components/FeaturesSection";
 import CTASection from "@/components/CTASection";
@@ -31,11 +30,8 @@ const Index = () => {
           <CharacterShowcase />
           <SwordSlashTransition variant="flame" />
           <ProductSection />
-          <SwordSlashTransition variant="thunder" />
           <Product3DViewerEnhanced />
-          <SwordSlashTransition />
-          <HashiraShowcase />
-          <SwordSlashTransition variant="water" />
+          <SwordSlashTransition variant="thunder" />
           <FeaturesSection />
           <CTASection />
         </main>
