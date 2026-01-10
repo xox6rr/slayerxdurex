@@ -1,15 +1,51 @@
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Flame, Shield } from "lucide-react";
 import NichirinBlade from "./NichirinBlade";
 import Hero3DScene from "./Hero3DScene";
-import { useHashiraTheme } from "@/contexts/HashiraThemeContext";
+import { useHashiraTheme, HashiraTheme } from "@/contexts/HashiraThemeContext";
+import { useRef } from "react";
+
+// Character images
 import tanjiroImg from "@/assets/characters/tanjiro.png";
+import nezukoImg from "@/assets/characters/nezuko.png";
+import rengokuImg from "@/assets/characters/rengoku.png";
+import giyuImg from "@/assets/characters/giyu.png";
+import shinobuImg from "@/assets/characters/shinobu.png";
+import muichiroImg from "@/assets/characters/muichiro.png";
+
+// Map themes to character images
+const themeCharacterMap: Record<HashiraTheme, string> = {
+  tanjiro: tanjiroImg,
+  nezuko: nezukoImg,
+  rengoku: rengokuImg,
+  giyu: giyuImg,
+  shinobu: shinobuImg,
+  muichiro: muichiroImg,
+  zenitsu: tanjiroImg, // fallback
+  tengen: rengokuImg,  // fallback
+  gyomei: giyuImg,     // fallback
+  sanemi: muichiroImg, // fallback
+};
+
 const HeroSection = () => {
-  const { themeInfo } = useHashiraTheme();
+  const { themeInfo, theme } = useHashiraTheme();
+  const sectionRef = useRef<HTMLElement>(null);
+  
+  // Parallax scroll effect
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start start", "end start"]
+  });
+  
+  const characterY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
+  const characterScale = useTransform(scrollYProgress, [0, 1], [1, 1.1]);
+  const characterOpacity = useTransform(scrollYProgress, [0, 0.8], [0.2, 0]);
+
+  const currentCharacterImg = themeCharacterMap[theme];
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section ref={sectionRef} className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* 3D Background Scene */}
       <Hero3DScene />
       
@@ -37,23 +73,41 @@ const HeroSection = () => {
         </svg>
       </div>
 
-      {/* Tanjiro Background Character */}
-      <motion.div
-        initial={{ opacity: 0, scale: 1.1 }}
-        animate={{ opacity: 0.15, scale: 1 }}
-        transition={{ duration: 1.5, ease: "easeOut" }}
-        className="absolute right-0 bottom-0 w-[50%] h-full pointer-events-none hidden lg:block"
-      >
-        <img 
-          src={tanjiroImg} 
-          alt="Tanjiro Kamado"
-          className="w-full h-full object-contain object-bottom opacity-60"
-          style={{
-            maskImage: 'linear-gradient(to top, rgba(0,0,0,0.8), rgba(0,0,0,0.3) 60%, transparent 90%)',
-            WebkitMaskImage: 'linear-gradient(to top, rgba(0,0,0,0.8), rgba(0,0,0,0.3) 60%, transparent 90%)',
+      {/* Dynamic Character Background with Parallax */}
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={theme}
+          initial={{ opacity: 0, scale: 1.15, x: 50 }}
+          animate={{ opacity: 1, scale: 1, x: 0 }}
+          exit={{ opacity: 0, scale: 0.95, x: -50 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="absolute right-0 bottom-0 w-[55%] h-[110%] pointer-events-none hidden lg:block"
+          style={{ 
+            y: characterY,
+            scale: characterScale,
+            opacity: characterOpacity
           }}
-        />
-      </motion.div>
+        >
+          <motion.img 
+            src={currentCharacterImg} 
+            alt={themeInfo.name}
+            className="w-full h-full object-contain object-bottom"
+            style={{
+              maskImage: 'linear-gradient(to top, rgba(0,0,0,0.9), rgba(0,0,0,0.4) 50%, transparent 85%), linear-gradient(to left, rgba(0,0,0,0.9), rgba(0,0,0,0.3) 70%, transparent)',
+              WebkitMaskImage: 'linear-gradient(to top, rgba(0,0,0,0.9), rgba(0,0,0,0.4) 50%, transparent 85%), linear-gradient(to left, rgba(0,0,0,0.9), rgba(0,0,0,0.3) 70%, transparent)',
+              filter: `drop-shadow(0 0 60px hsl(${themeInfo.colors.glow} / 0.3))`,
+            }}
+          />
+          
+          {/* Character glow effect */}
+          <div 
+            className="absolute inset-0 opacity-20 blur-3xl"
+            style={{ 
+              background: `radial-gradient(ellipse at center bottom, hsl(${themeInfo.colors.primary} / 0.4), transparent 60%)` 
+            }}
+          />
+        </motion.div>
+      </AnimatePresence>
 
       {/* Dynamic theme glow */}
       <div 
