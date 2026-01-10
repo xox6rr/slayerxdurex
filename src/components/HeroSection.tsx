@@ -4,7 +4,7 @@ import { Flame, Shield } from "lucide-react";
 import NichirinBlade from "./NichirinBlade";
 import Hero3DScene from "./Hero3DScene";
 import { useHashiraTheme } from "@/contexts/HashiraThemeContext";
-
+import tanjiroImg from "@/assets/characters/tanjiro.png";
 const HeroSection = () => {
   const { themeInfo } = useHashiraTheme();
 
@@ -36,6 +36,24 @@ const HeroSection = () => {
           <path d="M0 200 L0 150 L150 100 L350 130 L550 70 L750 120 L950 60 L1200 100 L1200 200 Z" fill="hsl(240, 20%, 10%)" />
         </svg>
       </div>
+
+      {/* Tanjiro Background Character */}
+      <motion.div
+        initial={{ opacity: 0, scale: 1.1 }}
+        animate={{ opacity: 0.15, scale: 1 }}
+        transition={{ duration: 1.5, ease: "easeOut" }}
+        className="absolute right-0 bottom-0 w-[50%] h-full pointer-events-none hidden lg:block"
+      >
+        <img 
+          src={tanjiroImg} 
+          alt="Tanjiro Kamado"
+          className="w-full h-full object-contain object-bottom opacity-60"
+          style={{
+            maskImage: 'linear-gradient(to top, rgba(0,0,0,0.8), rgba(0,0,0,0.3) 60%, transparent 90%)',
+            WebkitMaskImage: 'linear-gradient(to top, rgba(0,0,0,0.8), rgba(0,0,0,0.3) 60%, transparent 90%)',
+          }}
+        />
+      </motion.div>
 
       {/* Dynamic theme glow */}
       <div 
