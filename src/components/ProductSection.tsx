@@ -1,6 +1,12 @@
 import { motion } from "framer-motion";
 import ProductCard from "./ProductCard";
 
+// Import product images
+import waterBreathingImg from "@/assets/products/water-breathing.png";
+import flameBreathingImg from "@/assets/products/flame-breathing.png";
+import thunderBreathingImg from "@/assets/products/thunder-breathing.png";
+import mistBreathingImg from "@/assets/products/mist-breathing.png";
+
 const products = [
   {
     name: "WATER BREATHING",
@@ -8,6 +14,7 @@ const products = [
     breathingStyle: "壱ノ型 • FIRST FORM",
     description: "Flow like the calm river. Ultra-smooth experience with advanced lubricant formula inspired by Giyu Tomioka's fluid techniques.",
     styleType: "water" as const,
+    image: waterBreathingImg,
   },
   {
     name: "FLAME BREATHING",
@@ -15,6 +22,7 @@ const products = [
     breathingStyle: "玖ノ型 • NINTH FORM",
     description: "Set your heart ablaze. Heat-activated technology for intense passion, channeling Rengoku's unwavering spirit.",
     styleType: "flame" as const,
+    image: flameBreathingImg,
   },
   {
     name: "THUNDER BREATHING",
@@ -22,6 +30,7 @@ const products = [
     breathingStyle: "壱ノ型 • THUNDERCLAP",
     description: "Swift as lightning. Ultra-thin for maximum sensation, inspired by Zenitsu's lightning-fast Thunderclap and Flash.",
     styleType: "thunder" as const,
+    image: thunderBreathingImg,
   },
   {
     name: "MIST BREATHING",
@@ -29,6 +38,7 @@ const products = [
     breathingStyle: "漆ノ型 • OBSCURING CLOUDS",
     description: "Gentle as morning mist. Ultra-sensitive protection with subtle textures, channeling Muichiro's ethereal techniques.",
     styleType: "mist" as const,
+    image: mistBreathingImg,
   },
 ];
 
@@ -51,12 +61,14 @@ const ProductSection = () => {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
           className="text-center mb-16"
         >
           <motion.p
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
+            transition={{ delay: 0.2 }}
             className="font-japanese text-[hsl(270,60%,70%)] text-xl mb-4"
           >
             呼吸法コレクション

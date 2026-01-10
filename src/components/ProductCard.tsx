@@ -8,6 +8,7 @@ interface ProductCardProps {
   breathingStyle: string;
   description: string;
   styleType: "water" | "flame" | "thunder" | "mist";
+  image?: string;
   delay?: number;
 }
 
@@ -40,12 +41,12 @@ const styleConfig = {
     kanji: "雷",
   },
   mist: {
-    gradient: "from-[hsl(200,20%,70%)] to-[hsl(180,30%,60%)]",
-    glow: "shadow-[0_0_40px_hsl(200,20%,70%,0.4)]",
-    border: "border-[hsl(200,20%,70%,0.3)] hover:border-[hsl(200,20%,70%,0.6)]",
-    accent: "text-[hsl(200,20%,75%)]",
-    bg: "bg-[hsl(200,20%,70%,0.1)]",
-    particleColor: "hsl(200, 20%, 75%)",
+    gradient: "from-[hsl(280,60%,60%)] to-[hsl(260,50%,50%)]",
+    glow: "shadow-[0_0_40px_hsl(280,60%,60%,0.4)]",
+    border: "border-[hsl(280,60%,60%,0.3)] hover:border-[hsl(280,60%,60%,0.6)]",
+    accent: "text-[hsl(280,60%,70%)]",
+    bg: "bg-[hsl(280,60%,60%,0.1)]",
+    particleColor: "hsl(280, 60%, 70%)",
     kanji: "霞",
   },
 };
@@ -56,6 +57,7 @@ const ProductCard = ({
   breathingStyle,
   description,
   styleType,
+  image,
   delay = 0,
 }: ProductCardProps) => {
   const config = styleConfig[styleType];
@@ -67,100 +69,123 @@ const ProductCard = ({
       ref={cardRef}
       initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-100px" }}
-      transition={{ duration: 0.6, delay }}
-      whileHover={{ y: -8, transition: { duration: 0.3 } }}
+      viewport={{ once: true, margin: "-50px" }}
+      transition={{ duration: 0.5, delay, ease: "easeOut" }}
+      whileHover={{ y: -10, transition: { duration: 0.25, ease: "easeOut" } }}
       onHoverStart={() => setIsHovered(true)}
       onHoverEnd={() => setIsHovered(false)}
       className={cn(
-        "group relative glass-dark rounded-2xl p-6 border transition-all duration-500 overflow-hidden",
+        "group relative glass-dark rounded-2xl border transition-all duration-300 overflow-hidden cursor-pointer",
         config.border,
         "hover:shadow-2xl"
       )}
     >
-      {/* Breathing style particles on hover */}
-      {isHovered && (
-        <div className="absolute inset-0 pointer-events-none overflow-hidden">
-          {[...Array(12)].map((_, i) => (
-            <motion.div
-              key={i}
-              className="absolute w-2 h-2 rounded-full"
-              style={{
-                background: config.particleColor,
-                left: `${10 + Math.random() * 80}%`,
-                top: `${10 + Math.random() * 80}%`,
-                boxShadow: `0 0 10px ${config.particleColor}`,
-              }}
-              initial={{ scale: 0, opacity: 0 }}
-              animate={{
-                scale: [0, 1.5, 0],
-                opacity: [0, 0.8, 0],
-                y: styleType === 'flame' ? -50 : [0, -20, 0],
-                x: styleType === 'thunder' ? [0, 10, -10, 0] : 0,
-              }}
-              transition={{
-                duration: 1.5,
-                delay: i * 0.1,
-                repeat: Infinity,
-              }}
-            />
-          ))}
+      {/* Product Image */}
+      {image && (
+        <div className="relative w-full aspect-square overflow-hidden">
+          <motion.img
+            src={image}
+            alt={name}
+            className="w-full h-full object-cover"
+            initial={{ scale: 1 }}
+            whileHover={{ scale: 1.08 }}
+            transition={{ duration: 0.4, ease: "easeOut" }}
+          />
+          
+          {/* Gradient overlay */}
+          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent" />
+          
+          {/* Kanji watermark on image */}
+          <motion.div 
+            className="absolute top-4 right-4 font-japanese text-5xl opacity-30 text-white drop-shadow-lg"
+            animate={isHovered ? { scale: 1.1, rotate: 5 } : { scale: 1, rotate: 0 }}
+            transition={{ duration: 0.3 }}
+          >
+            {config.kanji}
+          </motion.div>
+
+          {/* Breathing style particles on hover */}
+          {isHovered && (
+            <div className="absolute inset-0 pointer-events-none overflow-hidden">
+              {[...Array(15)].map((_, i) => (
+                <motion.div
+                  key={i}
+                  className="absolute w-2 h-2 rounded-full"
+                  style={{
+                    background: config.particleColor,
+                    left: `${10 + Math.random() * 80}%`,
+                    bottom: `${20 + Math.random() * 40}%`,
+                    boxShadow: `0 0 10px ${config.particleColor}`,
+                  }}
+                  initial={{ scale: 0, opacity: 0, y: 0 }}
+                  animate={{
+                    scale: [0, 1.5, 0],
+                    opacity: [0, 0.9, 0],
+                    y: styleType === 'flame' ? -80 : styleType === 'mist' ? -40 : [0, -30, 0],
+                    x: styleType === 'thunder' ? [0, 15, -15, 0] : styleType === 'water' ? [0, 10, -10, 0] : 0,
+                  }}
+                  transition={{
+                    duration: 1.2,
+                    delay: i * 0.08,
+                    repeat: Infinity,
+                  }}
+                />
+              ))}
+            </div>
+          )}
         </div>
       )}
 
-      {/* Glow effect on hover */}
-      <div
-        className={cn(
-          "absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10",
-          config.glow
-        )}
-      />
-
-      {/* Kanji background */}
-      <div className="absolute top-4 right-4 font-japanese text-6xl opacity-10 group-hover:opacity-20 transition-opacity">
-        {config.kanji}
-      </div>
-
-      {/* Icon */}
-      <div className={cn("w-16 h-16 rounded-xl flex items-center justify-center mb-4 relative", config.bg)}>
-        <div className={cn("w-8 h-8 rounded-full bg-gradient-to-br", config.gradient)} />
+      {/* Content */}
+      <div className="p-5">
+        {/* Glow effect on hover */}
         <motion.div
-          className={cn("absolute inset-0 rounded-xl", config.bg)}
-          animate={isHovered ? { scale: [1, 1.2, 1] } : {}}
-          transition={{ duration: 1, repeat: Infinity }}
+          className={cn(
+            "absolute inset-0 rounded-2xl -z-10 transition-opacity duration-300",
+            config.glow
+          )}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: isHovered ? 1 : 0 }}
         />
+
+        {/* Japanese name */}
+        <p className={cn("font-japanese text-sm mb-2", config.accent)}>
+          {japaneseName}
+        </p>
+
+        {/* Breathing Style Badge */}
+        <div className={cn("inline-block px-3 py-1 rounded-full text-xs font-display tracking-wider mb-3", config.bg, config.accent)}>
+          {breathingStyle}
+        </div>
+
+        {/* Title */}
+        <h3 className="font-brush text-xl mb-2 text-foreground">
+          {name}
+        </h3>
+
+        {/* Description */}
+        <p className="text-muted-foreground text-sm leading-relaxed mb-4 line-clamp-3">
+          {description}
+        </p>
+
+        {/* CTA */}
+        <motion.button
+          whileHover={{ x: 5 }}
+          className={cn("font-display tracking-wider text-sm flex items-center gap-2", config.accent)}
+        >
+          詳細を見る • DISCOVER
+          <motion.svg 
+            width="16" 
+            height="16" 
+            viewBox="0 0 16 16" 
+            fill="none"
+            animate={isHovered ? { x: 5 } : { x: 0 }}
+            transition={{ duration: 0.2 }}
+          >
+            <path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+          </motion.svg>
+        </motion.button>
       </div>
-
-      {/* Japanese name */}
-      <p className={cn("font-japanese text-sm mb-2", config.accent)}>
-        {japaneseName}
-      </p>
-
-      {/* Breathing Style Badge */}
-      <div className={cn("inline-block px-3 py-1 rounded-full text-xs font-display tracking-wider mb-3", config.bg, config.accent)}>
-        {breathingStyle}
-      </div>
-
-      {/* Title */}
-      <h3 className="font-brush text-2xl mb-2 text-foreground group-hover:text-gradient-nichirin transition-all">
-        {name}
-      </h3>
-
-      {/* Description */}
-      <p className="text-muted-foreground text-sm leading-relaxed mb-4">
-        {description}
-      </p>
-
-      {/* CTA */}
-      <motion.button
-        whileHover={{ x: 5 }}
-        className={cn("font-display tracking-wider text-sm flex items-center gap-2", config.accent)}
-      >
-        詳細を見る • DISCOVER
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" className="transition-transform group-hover:translate-x-1">
-          <path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-        </svg>
-      </motion.button>
     </motion.div>
   );
 };
