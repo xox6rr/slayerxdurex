@@ -75,7 +75,7 @@ const Footer = () => {
           className="mt-16 pt-8 border-t border-border flex flex-col md:flex-row justify-between items-center gap-4"
         >
           <p className="text-muted-foreground text-sm">
-            © 2024 Durex × 鬼滅の刃. All rights reserved.
+            © 2024 Durex × 鬼滅の刃. All rights reserved. Made by Priyam
           </p>
           <div className="flex items-center gap-4">
             <span className="font-japanese text-[hsl(270,60%,60%)] text-lg">全集中・常中</span>
