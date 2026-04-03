@@ -8,6 +8,7 @@ import waterBreathingImg from "@/assets/products/water-breathing.png";
 import flameBreathingImg from "@/assets/products/flame-breathing.png";
 import thunderBreathingImg from "@/assets/products/thunder-breathing.png";
 import mistBreathingImg from "@/assets/products/mist-breathing.png";
+import glowBreathingImg from "@/assets/products/glow-breathing.png";
 
 export const products = [
   {
