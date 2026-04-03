@@ -38,6 +38,7 @@ const Index = () => {
         <ProductSection />
         <Product3DViewerEnhanced />
         <SwordSlashTransition variant="thunder" />
+        <GlowPromoSection />
         <FeaturesSection />
         <CTASection />
       </main>
