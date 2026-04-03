@@ -12,7 +12,7 @@ interface Product {
   japaneseName: string;
   breathingStyle: string;
   description: string;
-  styleType: "water" | "flame" | "thunder" | "mist";
+  styleType: "water" | "flame" | "thunder" | "mist" | "glow";
   image?: string;
   price: number;
 }
