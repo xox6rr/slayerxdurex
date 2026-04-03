@@ -51,6 +51,16 @@ export const products = [
     image: mistBreathingImg,
     price: 2180,
   },
+  {
+    id: "glow-breathing-001",
+    name: "GLOW BREATHING",
+    japaneseName: "光の呼吸",
+    breathingStyle: "終ノ型 • LUMINOUS FORM",
+    description: "Illuminate the darkness. Glow-in-the-dark technology with bioluminescent coating, inspired by the mystical green flames of the Demon Slayer mark.",
+    styleType: "glow" as const,
+    image: glowBreathingImg,
+    price: 2980,
+  },
 ];
 
 interface ProductSectionProps {
