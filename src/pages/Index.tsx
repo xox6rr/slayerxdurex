@@ -6,6 +6,7 @@ import Product3DViewerEnhanced from "@/components/Product3DViewerEnhanced";
 import CharacterShowcase from "@/components/CharacterShowcase";
 import FeaturesSection from "@/components/FeaturesSection";
 import CTASection from "@/components/CTASection";
+import GlowPromoSection from "@/components/GlowPromoSection";
 import Footer from "@/components/Footer";
 import AtmosphericParticles from "@/components/AtmosphericParticles";
 import WisteriaDecoration from "@/components/WisteriaDecoration";
