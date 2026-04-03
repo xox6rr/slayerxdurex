@@ -8,6 +8,7 @@ import waterBreathingImg from "@/assets/products/water-breathing.png";
 import flameBreathingImg from "@/assets/products/flame-breathing.png";
 import thunderBreathingImg from "@/assets/products/thunder-breathing.png";
 import mistBreathingImg from "@/assets/products/mist-breathing.png";
+import glowBreathingImg from "@/assets/products/glow-breathing.png";
 
 export const products = [
   {
@@ -49,6 +50,16 @@ export const products = [
     styleType: "mist" as const,
     image: mistBreathingImg,
     price: 2180,
+  },
+  {
+    id: "glow-breathing-001",
+    name: "GLOW BREATHING",
+    japaneseName: "光の呼吸",
+    breathingStyle: "終ノ型 • LUMINOUS FORM",
+    description: "Illuminate the darkness. Glow-in-the-dark technology with bioluminescent coating, inspired by the mystical green flames of the Demon Slayer mark.",
+    styleType: "glow" as const,
+    image: glowBreathingImg,
+    price: 2980,
   },
 ];
 
@@ -114,7 +125,7 @@ const ProductSection = ({ onProductClick }: ProductSectionProps) => {
           </motion.header>
 
           {/* Product Grid */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6" role="list">
+          <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-6" role="list">
             {products.map((product, index) => (
               <div key={product.id} onClick={() => handleProductClick(product)}>
                 <ProductCard
