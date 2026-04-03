@@ -42,7 +42,8 @@ export const usePersistedCart = () => {
         breathingStyle: item.breathing_style || "",
         styleType: (item.breathing_style?.toLowerCase().includes("water") ? "water" :
                    item.breathing_style?.toLowerCase().includes("flame") ? "flame" :
-                   item.breathing_style?.toLowerCase().includes("thunder") ? "thunder" : "mist") as CartItem["styleType"],
+                   item.breathing_style?.toLowerCase().includes("thunder") ? "thunder" :
+                   item.breathing_style?.toLowerCase().includes("glow") ? "glow" : "mist") as CartItem["styleType"],
         price: Number(item.price),
         quantity: item.quantity,
         image: item.product_image || undefined,
