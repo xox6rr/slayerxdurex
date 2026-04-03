@@ -174,6 +174,14 @@ const variants = [
     accent: "from-yellow-500 to-amber-500",
     description: "Zenitsu's lightning strike"
   },
+  { 
+    name: "GLOW BREATHING", 
+    japaneseName: "光の呼吸",
+    color: "#22c55e", 
+    emissive: "#15803d", 
+    accent: "from-green-500 to-emerald-500",
+    description: "Bioluminescent radiance"
+  },
 ];
 
 const Product3DViewerEnhanced = () => {
