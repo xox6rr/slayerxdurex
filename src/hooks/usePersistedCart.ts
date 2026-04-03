@@ -7,7 +7,7 @@ export interface CartItem {
   name: string;
   japaneseName: string;
   breathingStyle: string;
-  styleType: "water" | "flame" | "thunder" | "mist";
+  styleType: "water" | "flame" | "thunder" | "mist" | "glow";
   price: number;
   quantity: number;
   image?: string;
