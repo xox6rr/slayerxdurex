@@ -125,7 +125,7 @@ const ProductSection = ({ onProductClick }: ProductSectionProps) => {
           </motion.header>
 
           {/* Product Grid */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6" role="list">
+          <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-6" role="list">
             {products.map((product, index) => (
               <div key={product.id} onClick={() => handleProductClick(product)}>
                 <ProductCard

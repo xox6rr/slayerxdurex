@@ -56,6 +56,14 @@ const styleConfig = {
     kanji: "霞",
     forms: ["垂天遠霞 - Distant Haze", "移流斬り - Shifting Flow Slash", "朧 - Obscuring Clouds"],
   },
+  glow: {
+    gradient: "from-[hsl(120,80%,50%)] to-[hsl(150,70%,40%)]",
+    accent: "text-[hsl(120,80%,60%)]",
+    bg: "bg-[hsl(120,80%,50%,0.1)]",
+    buttonBg: "bg-gradient-to-r from-[hsl(120,80%,50%)] to-[hsl(150,70%,40%)]",
+    kanji: "光",
+    forms: ["発光斬り - Luminous Slash", "蛍火 - Firefly Glow", "光輝の型 - Radiant Form"],
+  },
 };
 
 const sizes = ["S", "M", "L", "XL"];

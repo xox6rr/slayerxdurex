@@ -59,6 +59,16 @@ const styleConfig = {
     kanji: "霞",
     buttonBg: "bg-gradient-to-r from-[hsl(280,60%,60%)] to-[hsl(260,50%,50%)]",
   },
+  glow: {
+    gradient: "from-[hsl(120,80%,50%)] to-[hsl(150,70%,40%)]",
+    glow: "shadow-[0_0_50px_hsl(120,80%,50%,0.5)]",
+    border: "border-[hsl(120,80%,50%,0.3)] hover:border-[hsl(120,80%,50%,0.6)]",
+    accent: "text-[hsl(120,80%,60%)]",
+    bg: "bg-[hsl(120,80%,50%,0.1)]",
+    particleColor: "hsl(120, 80%, 60%)",
+    kanji: "光",
+    buttonBg: "bg-gradient-to-r from-[hsl(120,80%,50%)] to-[hsl(150,70%,40%)]",
+  },
 };
 
 const ProductCard = ({
